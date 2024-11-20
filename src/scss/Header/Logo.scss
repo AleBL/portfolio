@@ -39,14 +39,9 @@ header.logo {
                 }
     
                 &.preload {
-                    &.outer {
+                    &.logo {
                         transform: scale(0,0) rotate(360deg);
                         -webkit-transform: scale(0,0) rotate(360deg);
-                    }
-    
-                    &.inner {
-                        transform: scale(0,0) rotate(-180deg);
-                        -webkit-transform: scale(0,0) rotate(-180deg);
                     }
                 }
             }

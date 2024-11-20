@@ -20,8 +20,7 @@ export const ScrollHook: HTMLElement | Window = DOM.isIE() ? window : MainScroll
 
 // Logo images
 export const Logo = {
-    Outer: DOM.getFirstElement('header.logo .image img.outer'),
-    Inner: DOM.getFirstElement('header.logo .image img.inner')
+    Logo: DOM.getFirstElement('header.logo .image img.logo')
 }
 
 // Fixed button to open menu
