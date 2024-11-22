@@ -1,28 +1,27 @@
-import i18next from 'i18next/index';
-import en from './locales/en';
-import pt from './locales/pt';
+import i18next from "i18next/index";
+import en from "./locales/en";
+import pt from "./locales/pt";
 
 const url = new URL(window.location.href);
 const params = new URLSearchParams(url.search);
-const language = params.get('lang');
+const language = params.get("lang");
 
 const resources = {
     en: {
-        translation: en
+        translation: en,
     },
     pt: {
-        translation: pt
-    }
+        translation: pt,
+    },
 };
 
 const availableLanguages = Object.keys(resources);
 
 const initI18n = () => {
     i18next.init({
-        lng: availableLanguages.includes(language) ? language : 'en',
-        resources: resources
+        lng: availableLanguages.includes(language) ? language : "en",
+        resources: resources,
     });
-
 };
 
 initI18n();
