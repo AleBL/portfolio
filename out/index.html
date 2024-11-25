@@ -18,14 +18,14 @@
     <!-- Meta Data -->
     <meta name="description"
         content="I am a software engineer experienced with implementing low-level systems, library and API design, full-stack development, and DevOps methodologies.">
-    <link rel="canonical" href="https://jackson.nestelroad.com">
     <meta property="og:title" content="Alessandro Barros">
     <meta property="og:description"
-        content="I am a software engineer experienced with implementing low-level systems, library and API design, full-stack development, and DevOps methodologies.">
+    content="I am a software engineer experienced with implementing low-level systems, library and API design, full-stack development, and DevOps methodologies.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://jackson.nestelroad.com/images/icons/og-image.png">
     <meta property="og:image:alt" content="Logo with hexagon background">
-    <meta property="og:url" content="https://jackson.nestelroad.com">
+    <link rel="canonical" href="https://example.com">
+    <meta property="og:image" content="https://example.com/images/icons/og-image.png">
+    <meta property="og:url" content="https://example.com">
     <meta name="twitter:card"
         content="I am a software engineer experienced with implementing low-level systems, library and API design, full-stack development, and DevOps methodologies.">
 
@@ -85,27 +85,27 @@
             <hr>
             <div class="sections">
                 <a href="#about">
-                    <div class="slider">About</div>
+                    <div id="about_div" class="slider">About</div>
                     <i class="fas fa-user"></i>
                 </a>
                 <a href="#skills">
-                    <div class="slider">Skills</div>
+                    <div id="skills_div" class="slider">Skills</div>
                     <i class="fas fa-code"></i>
                 </a>
                 <a href="#experience">
-                    <div class="slider">Experience</div>
+                    <div id="experience_div" class="slider">Experience</div>
                     <i class="fas fa-globe-americas"></i>
                 </a>
                 <a href="#projects">
-                    <div class="slider">Projects</div>
+                    <div id="projects_div" class="slider">Projects</div>
                     <i class="fas fa-cog"></i>
                 </a>
                 <a href="#education">
-                    <div class="slider">Education</div>
+                    <div id="education_div" class="slider">Education</div>
                     <i class="fas fa-university"></i>
                 </a>
                 <a href="#connect">
-                    <div class="slider">Connect</div>
+                    <div id="connect_div" class="slider">Connect</div>
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
@@ -120,7 +120,10 @@
                             </div>
                             <div class="info left">
                                 <div class="name">Alessandro Barros</div>
-                                <div class="title is-color-light">Software Engineer</div>
+                                <div id="my_position_div" class="title is-color-light">Software Engineer</div>
+                            </div>
+
+                            <div id="language-switcher" class="info right">
                             </div>
                         </a>
                     </div>
@@ -145,11 +148,10 @@
             </section>
             <section id="about" class="section is-theme-primary is-long is-wavy-bottom">
                 <div class="container xs-y-margin-between-3 is-center-aligned">
-                    <h1 class="is-size-4">Hello, I'm Jackson.</h1>
-                    <h2 class="is-size-5 is-light-weight">I am excited to share my passion with you!</h2>
+                    <h1 id="hello_alessandro_h1" class="is-size-4">Hello, I'm Alessandro.</h1>
                     <div class="about-me flex row xs-x-center xs-padding-between-5">
                         <div class="flex col xs-y-center xs-7 sm-4">
-                            <img class="me" src="./images/Content/Me.jpeg" alt="Me">
+                            <img class="me" src="./images/Content/Me.png" alt="Me">
                         </div>
                         <div class="flex col xs-y-center xs-12 sm-8">
                             <p class="flavor is-size-6 is-light-weight is-justified is-body"></p>
@@ -163,10 +165,9 @@
             <section id="skills" class="section has-visual-tags">
                 <div class="card is-theme-secondary elevation-1">
                     <div class="content padding-x-4 padding-y-7 xs-y-margin-between-5 is-center-aligned">
-                        <p class="is-size-6 is-light-weight">I have worked with several different areas of technology,
-                            but I am always looking to explore new things and use technology in new ways.</p>
-                        <p class="is-size-6 is-light-weight">My primary experience has been in systems-level
-                            development, library and API design, full-stack web development, and cloud technologies. I am highly proficient in C++, Rust, and TypeScript.</p>
+                        <p id="skill_short_text_p" class="is-size-6 is-light-weight">
+                            <!-- will be replaced by the correct translation -->
+                        </p>
                         <hr />
                         <div class="skills-filter">
                             <div class="flex row xs-nowrap xs-x-center xs-y-center xs-x-margin-between-2">
@@ -199,7 +200,7 @@
                         <h1 class="title is-size-4">Connect</h1>
                         <p class="subtitle is-size-5 is-light-weight">Enough about me. I want to hear about you!</p>
                         <div class="form-container">
-                            <form action="https://formspree.io/jackson@nestelroad.com" method="post"
+                            <form action="https://formspree.io/ale_alessandro_ale@hotmail.com" method="post"
                                 accept-charset="utf-8">
                                 <p class="is-size-8 is-color-action">Have a question? Want to work together? Just want
                                     to chat?</p>
@@ -222,7 +223,7 @@
                     <div class="container xs-y-margin-between-5">
                         <div class="flex row xs-x-center xs-y-center">
                             <div class="logo"></div>
-                            <p class="email is-size-7">jackson@nestelroad.com</p>
+                            <p class="email is-size-7">ale_alessandro_ale@hotmail.com</p>
                         </div>
                         <hr class="is-light is-width-30" />
                         <div class="social-icons flex row xs-x-center xs-y-center xs-padding-between-2"></div>

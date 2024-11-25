@@ -1,0 +1,27 @@
+@import "../Theme";
+
+.button-band {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  transition: filter 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 40px;
+  height: 40px;
+}
+
+.button-band > img {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+  }
+
+.button-band:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
