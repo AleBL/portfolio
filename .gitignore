@@ -3,6 +3,6 @@ setup.txt
 gulpfile-old.js
 src/_old
 out/css
-out/js
+out/js/scripts.js
 
 **/.Identifier
