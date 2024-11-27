@@ -2,6 +2,7 @@
 
 import { DataComponent } from '../Component'
 import { ElementFactory } from '../../Definitions/JSX'
+import { ReactNode } from 'react';
 
 // Format for data
 export interface ExperienceData {
@@ -70,7 +71,7 @@ export class Experience extends DataComponent<ExperienceData> {
         }
     }
 
-    private createCardBody(): HTMLElement {
+    private createCardBody(): ReactNode {
         return (
             <div className="panel">
                 <hr />
@@ -86,7 +87,7 @@ export class Experience extends DataComponent<ExperienceData> {
         );
     }
 
-    private createIcon(): HTMLElement {
+    private createIcon(): ReactNode {
         return <img src={`./images/Experience/${this.data.svg}.svg`} />;
     }
 
