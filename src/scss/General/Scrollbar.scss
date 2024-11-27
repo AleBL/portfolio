@@ -1,6 +1,6 @@
 // Custom scrollbar on right side of page
 
-@import "../Theme";
+@use "../Theme";
 
 main {
     .scroll {
@@ -11,12 +11,12 @@ main {
         }
 
         &::-webkit-scrollbar-track {
-            background: theme-background-color(secondary);
+            background: Theme.theme-background-color(secondary);
         }
 
         &::-webkit-scrollbar-thumb {
             width: 7px;
-            background: theme-background-color(dark);
+            background: Theme.theme-background-color(dark);
             border-radius: 2.5px;
         }
     }

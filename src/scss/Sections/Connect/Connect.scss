@@ -1,6 +1,7 @@
 // Styling for the Connect section
 
-@import "../../Theme";
+@use "sass:list";
+@use "../../Theme";
 
 $logo-sizes: 3rem, 2rem;
 $icon-sizes: 2rem, 1.5rem;
@@ -21,11 +22,11 @@ section#connect {
                     padding: 0.75rem 1rem;
                     margin: 0.5rem auto;
                     border-radius: 0;
-                    background: theme-background-color(darker);
-                    color: theme-font-color(darker);
+                    background: Theme.theme-background-color(darker);
+                    color: Theme.theme-font-color(darker);
     
                     font-family: inherit;
-                    @include font-size(7);
+                    @include Theme.font-size(7);
     
                     &:focus {
                         outline: none;
@@ -37,15 +38,15 @@ section#connect {
                 }
     
                 img.formspree {
-                    $sizes: get-font-size(8);
+                    $sizes: Theme.get-font-size(8);
                     width: auto;
                     opacity: 0.35;
                     -webkit-user-drag: none;
     
-                    height: nth($sizes, 1);
+                    height: list.nth($sizes, 1);
     
-                    @include for-mobile {
-                        height: nth($sizes, 2);
+                    @include Theme.for-mobile {
+                        height: list.nth($sizes, 2);
                     }
                 }
             }
@@ -58,32 +59,31 @@ section#connect {
         color: rgba(white, $opacity);
 
         .logo {
-            $size: nth($logo-sizes, 1);
+            $size: list.nth($logo-sizes, 1);
             width: $size;
             height: $size;
-
-            @include for-mobile {
-                $size: nth($logo-sizes, 2);
-                width: $size;
-                height: $size;
-            }
-
             margin-right: 0.5rem;
             opacity: $opacity;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center center;
+
+            @include Theme.for-mobile {
+                $size: list.nth($logo-sizes, 2);
+                width: $size;
+                height: $size;
+            }
         }
 
         .social-icons {
             .social {
                 >.btn {
-                    $size: nth($icon-sizes, 1);
+                    $size: list.nth($icon-sizes, 1);
                     width: $size;
                     height: $size;
 
-                    @include for-mobile {
-                        $size: nth($icon-sizes, 2);
+                    @include Theme.for-mobile {
+                        $size: list.nth($icon-sizes, 2);
                         width: $size;
                         height: $size;
                     }
@@ -98,6 +98,8 @@ section#connect {
 
         .note {
             .react-icon {
+                animation: react-spin 5s linear infinite;
+
                 @keyframes react-spin {
                     from {
                         transform: rotate(0);
@@ -106,8 +108,6 @@ section#connect {
                         transform: rotate(1turn);
                     }
                 }
-
-                animation: react-spin 5s linear infinite;
             }
         }
     }

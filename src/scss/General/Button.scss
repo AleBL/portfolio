@@ -1,6 +1,7 @@
 // Styling for button types
 
-@import "../Theme";
+@use "sass:color";
+@use "../Theme";
 
 .btn {
     display: inline-block;
@@ -18,10 +19,10 @@
     transform-style: preserve-3d;
 
     font-family: inherit;
-    @include font-size(8);
-    font-weight: font-weight(semi-bold);
+    font-weight: Theme.font-weight(semi-bold);
     text-transform: uppercase;
 
+    @include Theme.font-size(8);
 
     &:not(.disabled),
     &:not(:disabled) {
@@ -42,24 +43,24 @@
     }
 
     &.is-elevated {
-        @include elevation(2);
+        @include Theme.elevation(2);
 
         &:hover, &:focus {
-            @include elevation(4);
+            @include Theme.elevation(4);
         }
 
         &:active {
-            @include elevation(8);
+            @include Theme.elevation(8);
         }
     }
 
-    @each $name, $setting in $themes {
+    @each $name, $setting in Theme.$themes {
         &.is-#{$name} {
-            $background-color: theme-background-color($name);
-            $color: theme-font-color($name);
+            $background-color: Theme.theme-background-color($name);
+            $color: Theme.theme-font-color($name);
 
-            $hover: darken($background-color, 8);
-            $active: darken($background-color, 16);
+            $hover: color.adjust($background-color, $lightness: -8 * 1%);
+            $active: color.adjust($background-color, $lightness: -16 * 1%);
 
             background-color: $background-color;
             border-color: $background-color;
@@ -128,8 +129,8 @@
                 }
 
                 &.is-custom {
-                    @include for-not-ie {
-                        $default: theme-background-color(primary);
+                    @include Theme.for-not-ie {
+                        $default: Theme.theme-background-color(primary);
                         $var: --button-background-color;
                         color: $default;
                         color: var(#{$var}, #{$default});

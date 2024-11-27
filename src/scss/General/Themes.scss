@@ -1,22 +1,23 @@
 // Styling for all themes
 
-@import "../Theme";
+@use "../Theme";
+@use "sass:map";
 
-@each $name, $setting in $themes {
+@each $name, $setting in Theme.$themes {
     .is-theme-#{$name} {
-        $background-color: map-get($setting, background-color);
-        $color: map-get($setting, color);
+        $background-color: map.get($setting, background-color);
+        $color: map.get($setting, color);
 
         background-color: $background-color;
         color: $color;
 
         *::selection {
-            $selection: map-get($setting, selection);
-            background-color: map-get($selection, background-color);
-            color: map-get($selection, color);
+            $selection: map.get($setting, selection);
+            background-color: map.get($selection, background-color);
+            color: map.get($selection, color);
         }
 
-        @each $color-name, $color-value in map-get($setting, colors) {
+        @each $color-name, $color-value in map.get($setting, colors) {
             .is-color-#{$color-name} {
                 color: $color-value; 
             }

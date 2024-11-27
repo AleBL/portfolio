@@ -2,7 +2,7 @@
 
 @use 'sass:math';
 
-@import "../../Theme";
+@use "../../Theme";
 
 // Get number of hexagons per row based on screen size
 @function hex-per-row($size) {
@@ -25,7 +25,7 @@
 
 // Create offset for each row of hexagons
 @mixin create-offset($hex-per-row) {
-    $offset: percentage(math.div(math.div(1, $hex-per-row), 4));
+    $offset: math.percentage(math.div(math.div(1, $hex-per-row), 4));
     @for $i from 1 through $hex-per-row {
         &:nth-child(#{$hex-per-row * 2}n + #{$i}) {
             left: -$offset;
@@ -41,8 +41,8 @@
 // Create sizings for hexagon container
 @mixin skill-container-size($size) {
     $hex: hex-per-row($size);
-    min-width: percentage(math.div(1, $hex));
-    padding-top: percentage(math.div(1, $hex) * 0.866025404);
+    min-width: math.percentage(math.div(1, $hex));
+    padding-top: math.percentage(math.div(1, $hex) * 0.866025404);
     @include create-offset($hex);
 }
 
@@ -65,27 +65,27 @@ section#skills {
 
     // A single skill in the list
     .skill {
-        @include drawn-in;
+        @include Theme.drawn-in;
         
         position: relative;
         flex: 0;
         height: 0px;
 
-        @include for-viewport-down(xs) {
+        @include Theme.for-viewport-down(xs) {
             @include skill-container-size(mobile);
         }
 
-        @include for-viewport-up(sm) {
+        @include Theme.for-viewport-up(sm) {
             @include skill-container-size(portrait);
         }
 
-        @include for-viewport-up(md) {
+        @include Theme.for-viewport-up(md) {
             @include skill-container-size(landscape);
         }
 
         // Container for hexagon
         .hexagon-container {
-            color: theme-background-color(secondary);
+            color: Theme.theme-background-color(secondary);
             position: absolute;
             top: 0;
             left: 0;
@@ -102,7 +102,7 @@ section#skills {
             }
 
             // Fixes two Internet Explorer bugs in calculating heights and widths
-            @include for-ie {
+            @include Theme.for-ie {
                 height: 0px;
                 margin-bottom: 5px;
                 padding-top: 110%;
@@ -118,9 +118,9 @@ section#skills {
 
             // Center icon in container
             >svg.icon {
-                @include drawn-in;
+                @include Theme.drawn-in;
                 
-                color: theme-background-color(secondary);
+                color: Theme.theme-background-color(secondary);
                 position: absolute;
                 height: auto;
                 width: 75%;

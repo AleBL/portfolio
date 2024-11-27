@@ -2,7 +2,7 @@
 
 @use 'sass:math';
 
-@import "../Theme.scss";
+@use "../Theme.scss";
 
 // Defines a flexbox
 .flex {
@@ -27,8 +27,8 @@
 
     // Classes to be used with a breakpoint size
     // The page will render the largest one possible depending on the screen size
-    @each $name, $size in $breakpoints {
-        @include for-viewport-up($name) {
+    @each $name, $size in Theme.$breakpoints {
+        @include Theme.for-viewport-up($name) {
 
             // Enable wrapping
             &.#{$name}-wrap {
@@ -100,10 +100,10 @@
                     }
 
                     // Width sizes in a row
-                    @for $i from 1 through $grid-columns {
+                    @for $i from 1 through Theme.$grid-columns {
                         &.#{$name}-#{$i} {
-                            flex-basis: math.div(100%, $grid-columns) * $i;
-                            max-width: math.div(100%, $grid-columns) * $i;
+                            flex-basis: math.div(100%, Theme.$grid-columns) * $i;
+                            max-width: math.div(100%, Theme.$grid-columns) * $i;
                         }
                     }
                 }

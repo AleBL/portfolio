@@ -1,6 +1,6 @@
 // Styling for canvas at top of page
 
-@import "../Theme";
+@use "../Theme";
 
 .canvas {
     position: relative;
@@ -22,12 +22,16 @@
 
         .canvas-text {
             font-family: "Nunito Sans";
-            font-weight: font-weight(light);
+            font-weight: Theme.font-weight(light);
             color: white;
             word-wrap: break-word;
             user-select: none;
             -webkit-user-select: none;
             transform: translateZ(0) scale(1.0, 1.0);
+
+            opacity: 0;
+            animation: canvas-text-fade-in 1s;
+            animation-fill-mode: forwards;
 
             @keyframes canvas-text-fade-in {
                 from {
@@ -37,10 +41,6 @@
                     opacity: 1;
                 }
             }
-
-            opacity: 0;
-            animation: canvas-text-fade-in 1s;
-            animation-fill-mode: forwards;
 
             $delay: 1000ms;
 
@@ -57,7 +57,7 @@
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
 
-                @include for-ie {
+                @include Theme.for-ie {
                     background: none;
                     opacity: 0.5 !important;
                 }
@@ -72,31 +72,31 @@
             }
 
             .lg {
-                @include for-viewport-down(xs) {
+                @include Theme.for-viewport-down(xs) {
                     font-size: 2.5rem;
                 }
-                @include for-viewport-up(sm) {
+                @include Theme.for-viewport-up(sm) {
                     font-size: 4rem;
                 }
-                @include for-viewport-up(md) {
+                @include Theme.for-viewport-up(md) {
                     font-size: 6rem;
                 }
-                @include for-viewport-up(lg) {
+                @include Theme.for-viewport-up(lg) {
                     font-size: 8.5rem;
                 }
             }
 
             .sm {
-                @include for-viewport-down(xs) {
+                @include Theme.for-viewport-down(xs) {
                     font-size: 0.75rem;
                 }
-                @include for-viewport-up(sm) {
+                @include Theme.for-viewport-up(sm) {
                     font-size: 1rem;
                 }
-                @include for-viewport-up(md) {
+                @include Theme.for-viewport-up(md) {
                     font-size: 1.5rem;
                 }
-                @include for-viewport-up(lg) {
+                @include Theme.for-viewport-up(lg) {
                     font-size: 2rem;
                 }
             }
@@ -111,10 +111,10 @@
                 $vertical: 0%;
                 top: $vertical;
 
-                @include for-mobile {
+                @include Theme.for-mobile {
                     @include position-canvas-text(50%, $vertical);
                 }
-                @include for-not-mobile {
+                @include Theme.for-not-mobile {
                     @include position-canvas-text(10%, $vertical);
                 }
             }
@@ -124,10 +124,10 @@
                 $vertical: 0%;
                 top: $vertical;
 
-                @include for-mobile {
+                @include Theme.for-mobile {
                     @include position-canvas-text(50%, $vertical);
                 }
-                @include for-not-mobile  {
+                @include Theme.for-not-mobile  {
                     @include position-canvas-text(20%, $vertical);
                 }
             }
@@ -137,10 +137,10 @@
                 $vertical: 50%;
                 top: $vertical;
 
-                @include for-mobile {
+                @include Theme.for-mobile {
                     @include position-canvas-text(50%, $vertical);
                 }
-                @include for-not-mobile  {
+                @include Theme.for-not-mobile  {
                     @include position-canvas-text(50%, $vertical);
                 }
             }
@@ -150,10 +150,10 @@
                 $vertical: 100%;
                 top: $vertical;
 
-                @include for-mobile {
+                @include Theme.for-mobile {
                     @include position-canvas-text(50%, $vertical);
                 }
-                @include for-not-mobile  {
+                @include Theme.for-not-mobile  {
                     @include position-canvas-text(80%, $vertical);
                 }
             }
