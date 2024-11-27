@@ -1,16 +1,18 @@
 // Styling for the <section> tag and content
 
-@import "../../Theme.scss";
+@use "sass:list";
+@use "sass:string";
+@use "../../Theme.scss";
 
 @mixin custom-visual-tag($tag, $content: "") {
-    section##{to-lower-case($tag)} {
+    section##{string.to-lower-case($tag)} {
         &.has-visual-tags {
             &::before {
                 z-index: 1;
                 @if($content != "") {
                     content: "<#{$tag} #{$content}>";
 
-                    @include for-mobile {
+                    @include Theme.for-mobile {
                         content: "<#{$tag}>";
                     }
                 }
@@ -88,7 +90,7 @@ section {
         padding: 0;
 
         .section {
-            padding: 2rem nth($padding, 2);
+            padding: 2rem list.nth($padding, 2);
         }
     }
 
@@ -115,7 +117,7 @@ section {
 
         &::before, &::after {
             position: relative;
-            font-family: font-family(handwriting);
+            font-family: Theme.font-family(handwriting);
             font-weight: 700;
             margin: 0 auto;
             opacity: 0.5;
@@ -124,7 +126,7 @@ section {
             user-select: none;
 
             font-size: 1.25rem;
-            @include for-mobile {
+            @include Theme.for-mobile {
                 font-size: 1rem;
             }
 

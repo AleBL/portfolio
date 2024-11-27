@@ -1,6 +1,6 @@
 // Styling for links
 
-@import "../Theme.scss";
+@use "../Theme.scss";
 
 a {
     color: inherit;
@@ -10,7 +10,7 @@ a {
 
     &.is-colored-link {
         &:hover {
-            color: font-color(link);
+            color: Theme.font-color(link);
         }
     }
 }

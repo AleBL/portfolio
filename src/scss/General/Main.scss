@@ -1,18 +1,18 @@
 // Styling for <main> tag
 
-@import "../Theme";
+@use "../Theme";
 
 main {
     position: relative;
     right: 0;
     width: 100%;
     height: 100%;
-    font-family: font-family();
-    transition: right $menu-speed;
+    font-family: Theme.font-family();
+    transition: right Theme.$menu-speed;
     overflow: hidden;
 
     &[shifted] {
-        right: $menu-size;
+        right: Theme.$menu-size;
     }
 
     .scroll {
@@ -22,7 +22,7 @@ main {
         overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
     
-        @include for-ie {
+        @include Theme.for-ie {
             overflow: hidden !important;
         }
     }

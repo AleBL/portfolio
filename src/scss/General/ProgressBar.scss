@@ -1,6 +1,6 @@
 // Styling for a progress bar
 
-@import "../Theme";
+@use "../Theme";
 
 .progress-bar {
     $height: 5px;
@@ -12,19 +12,19 @@
     margin: 2rem 0.5rem;
     position: relative;
 
-    $variable: var(--progress-bar-color, #{theme-background-color(primary)});
+    $variable: var(--progress-bar-color, #{Theme.theme-background-color(primary)});
 
-    @function normal($color: theme-background-color(primary)) {
+    @function normal($color: Theme.theme-background-color(primary)) {
         @return $color;
     }
 
-    @function dark($color: theme-background-color(primary)) {
-        $shadow: shadow(0.4);
+    @function dark($color: Theme.theme-background-color(primary)) {
+        $shadow: Theme.shadow(0.4);
         @return linear-gradient(to right, #{$shadow}, #{$shadow}), 
                 linear-gradient(to right, #{$color}, #{$color});
     }
 
-    @function light($color: theme-background-color(primary)) {
+    @function light($color: Theme.theme-background-color(primary)) {
         $highlight: rgba(255, 255, 255, 0.5);
         @return linear-gradient(to right, $highlight, $highlight), 
                 linear-gradient(to right, $color, $color);
@@ -83,10 +83,10 @@
             margin-top: 0px;
             border-style: solid;
             border-bottom: none;
-            border-color: font-color(dark) transparent transparent transparent;
+            border-color: Theme.font-color(dark) transparent transparent transparent;
 
             border-width: 7px 4px;
-            @include for-mobile {
+            @include Theme.for-mobile {
                 border-width: 5px 3px;
             }
         }

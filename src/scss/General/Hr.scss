@@ -1,11 +1,11 @@
 // Styling and classes for <hr> elements
 
-@import "../Theme";
+@use "../Theme";
 
 hr {
     margin: 1rem auto;
     border: none;
-    background-color: shadow(1);
+    background-color: Theme.shadow(1);
     opacity: 0.1;
     height: 3px;
 

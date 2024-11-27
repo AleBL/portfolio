@@ -1,6 +1,6 @@
 // Styling for the Education section
 
-@import "../../Theme";
+@use "../../Theme";
 
 $icon-sizes: (
     xs: 3rem,
@@ -10,12 +10,12 @@ $icon-sizes: (
 
 section#education {
     .card.education {
-        @include drawn-in;
+        @include Theme.drawn-in;
 
         .content {
             .header {
                 &, .about {
-                    @include for-viewport-down(sm) {
+                    @include Theme.for-viewport-down(sm) {
                         >:not(:last-child) {
                             margin-bottom: 1rem;
                         }
@@ -27,13 +27,15 @@ section#education {
                     height: auto;
                     margin-right: 1rem;
 
-                    @include for-viewport-down(sm) {
+                    @include Theme.for-viewport-down(sm) {
                         margin-right: 0;
                     }
 
                     @each $breakpoint, $size in $icon-sizes {
-                        @include for-viewport-up($breakpoint) {
-                            width: $size;
+                        @include Theme.for-viewport-up($breakpoint) {
+                            & {
+                                width: $size;
+                            }
                         }
                     }
 
@@ -59,7 +61,7 @@ section#education {
 
                     .marker {
                         &.completed {
-                            @include for-viewport-down(sm) {
+                            @include Theme.for-viewport-down(sm) {
                                 display: none;
                             }
                         }

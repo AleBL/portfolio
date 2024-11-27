@@ -1,6 +1,6 @@
 // Classes for adding space between elements
 
-@import "../Theme";
+@use "../Theme";
 
 @mixin spacing($property, $size, $num, $direction) {
     $space: calc(0.2rem * #{$num});
@@ -36,8 +36,8 @@
 $properties: padding, margin;
 $directions: null, x, y;
 
-@each $name, $size in $breakpoints {
-    @include for-viewport-up($name) {
+@each $name, $size in Theme.$breakpoints {
+    @include Theme.for-viewport-up($name) {
         @for $i from 0 through 10 {
             @each $property in $properties {
                 @each $direction in $directions {

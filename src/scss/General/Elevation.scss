@@ -1,9 +1,9 @@
 // Classes to define elevation of elements
 
-@import "../Theme";
+@use "../Theme";
 
 @for $i from 0 through 24 {
   .elevation-#{$i} {
-    @include elevation($i);
+    @include Theme.elevation($i);
   }
 }

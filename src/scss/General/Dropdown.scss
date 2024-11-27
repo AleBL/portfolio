@@ -1,6 +1,6 @@
 // Styling for dropdowns
 
-@import "../Theme";
+@use "../Theme";
 
 .dropdown {
     display: block;
@@ -25,11 +25,11 @@
         outline: none;
     }
 
-    @each $name, $setting in $themes {
+    @each $name, $setting in Theme.$themes {
         &.is-#{$name} {
-            $background-color: theme-background-color($name);
-            $color: theme-font-color($name);
-            $hover-color: theme-font-color(secondary);
+            $background-color: Theme.theme-background-color($name);
+            $color: Theme.theme-font-color($name);
+            $hover-color: Theme.theme-font-color(secondary);
 
             background-color: inherit;
             color: inherit;
@@ -150,10 +150,10 @@
         transition: 0.2s;
         border-radius: 5px;
 
-        background-color: theme-background-color(secondary);
-        color: theme-font-color(secondary);
+        background-color: Theme.theme-background-color(secondary);
+        color: Theme.theme-font-color(secondary);
 
-        @include elevation(5);
+        @include Theme.elevation(5);
 
         .options {
             margin: 0;

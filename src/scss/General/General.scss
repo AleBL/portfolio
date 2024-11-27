@@ -1,6 +1,6 @@
 // A few general-purpose classes
 
-@import "../Theme";
+@use "../Theme";
 
 $padding-multiplier: 0.5rem;
 
@@ -91,7 +91,7 @@ $padding-multiplier: 0.5rem;
         >.title {
             padding-bottom: 1.5rem;
 
-            @include for-mobile {
+            @include Theme.for-mobile {
                 padding-bottom: 0.75rem;
             }
         }

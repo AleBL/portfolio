@@ -1,6 +1,6 @@
 // Styling for logo in the page's header
 
-@import "../Theme";
+@use "../Theme";
 
 // Working with the header itself
 header.logo {
@@ -49,11 +49,11 @@ header.logo {
     
         .info {
             margin-top: 0.825rem;
-            font-weight: font-weight(bold);
-            font-family: font-family(logo);
+            font-weight: Theme.font-weight(bold);
+            font-family: Theme.font-family(logo);
             text-transform: uppercase;
 
-            @include for-mobile {
+            @include Theme.for-mobile {
                 display: none;
             }
 
