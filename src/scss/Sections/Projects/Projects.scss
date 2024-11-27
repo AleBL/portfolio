@@ -1,11 +1,11 @@
 // Styling for the Projects section
 
-@import "../../Theme";
+@use "../../Theme";
 
 section#projects {
     .projects-container {
         > * {
-            @include drawn-in;
+            @include Theme.drawn-in;
             position: relative;
         }
     }
@@ -48,16 +48,17 @@ section#projects {
 
                     svg {
                         height: 1.1rem;
+                        width: auto;
+                        transition: $transition;
+                        & {
+                            transition-property: opacity, transform, height, width;
+                        }
 
-                        @include for-mobile {
+                        @include Theme.for-mobile {
                             height: 0.85rem;
                         }
 
-                        width: auto;
-                        transition: $transition;
-                        transition-property: opacity, transform, height, width;
-
-                        @include for-ie {
+                        @include Theme.for-ie {
                             width: 1.5rem;
                         }
                     }
@@ -77,7 +78,7 @@ section#projects {
                             transform: scale(0,0);
                             height: 0;
                             
-                            @include for-ie {
+                            @include Theme.for-ie {
                                 width: 0;
                             }
                         }
@@ -110,7 +111,7 @@ section#projects {
                                 height: auto;
                             }
     
-                            @include for-ie {
+                            @include Theme.for-ie {
                                 $size: 1.1rem;
     
                                 height: 0;

@@ -2,13 +2,13 @@
 
 @use 'sass:math';
 
-@import "../Theme";
+@use "../Theme";
 
 $displays: block, inline-block, flex, none;
 
 @each $display in $displays {
-    @each $name, $size in $breakpoints {
-        @include for-viewport-up($name) {
+    @each $name, $size in Theme.$breakpoints {
+        @include Theme.for-viewport-up($name) {
             .#{$name}-display-#{$display} {
                 display: $display !important;
             }

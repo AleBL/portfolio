@@ -1,6 +1,6 @@
 // Styling for fixed menu
 
-@import "../Theme";
+@use "../Theme";
 
 header.menu {
     position: fixed;
@@ -19,7 +19,7 @@ header.menu {
 
         &.light {
             .line {
-                background: font-color(white);
+                background: Theme.font-color(white);
             }
         }
 
@@ -27,7 +27,7 @@ header.menu {
             height: 2px;
             width: 100%;
             margin: 4px auto;
-            background: font-color(dark);
+            background: Theme.font-color(dark);
             transition: 0.25s ease-in-out;
         }
     }

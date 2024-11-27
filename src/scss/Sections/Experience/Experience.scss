@@ -1,6 +1,7 @@
 // Styling for the Experience section
 
-@import "../../Theme";
+@use "../../Theme";
+@use "sass:map";
 
 $icon-sizes: (
     xs: 3rem,
@@ -10,7 +11,7 @@ $icon-sizes: (
 
 section#experience {
     .card.experience {
-        @include drawn-in;
+        @include Theme.drawn-in;
 
         .content {
             .header {
@@ -20,7 +21,7 @@ section#experience {
                 flex-wrap: nowrap;
                 justify-content: center;
 
-                @include for-viewport-down(sm) {
+                @include Theme.for-viewport-down(sm) {
                     flex-wrap: wrap;
 
                     >:not(:last-child) {
@@ -32,15 +33,17 @@ section#experience {
                     flex: 0 0 auto;
                     height: auto;
                     margin-right: 1rem;
-                    min-width: map-get($icon-sizes, xs);
+                    min-width: map.get($icon-sizes, xs);
 
-                    @include for-viewport-down(sm) {
+                    @include Theme.for-viewport-down(sm) {
                         margin-right: 0;
                     }
 
                     @each $breakpoint, $size in $icon-sizes {
-                        @include for-viewport-up($breakpoint) {
-                            width: $size;
+                        @include Theme.for-viewport-up($breakpoint) {
+                            & {
+                                width: $size;
+                            }
                         }
                     }
 
@@ -53,12 +56,12 @@ section#experience {
                 }
 
                 .small {
-                    color: font-color(light);
-                    font-weight: font-weight(normal);
+                    color: Theme.font-color(light);
+                    font-weight: Theme.font-weight(normal);
                     font-style: italic;
                     font-size: 0.75rem;
 
-                    @include for-mobile {
+                    @include Theme.for-mobile {
                         font-size: 0.5rem;
                     }
                 }
@@ -71,17 +74,17 @@ section#experience {
                     text-align: left;
                     width: 100%;
 
-                    @include for-viewport-down(sm) {
+                    @include Theme.for-viewport-down(sm) {
                         align-items: center;
                         text-align: center;
                     }
 
                     .name {
-                        color: font-color(dark);
+                        color: Theme.font-color(dark);
                         transition: color 0.2s;
 
                         &:hover {
-                            color: font-color(link);
+                            color: Theme.font-color(link);
                         }
                     }
                 }
@@ -95,7 +98,7 @@ section#experience {
                     align-items: flex-end;
                     width: 100%;
 
-                    @include for-viewport-down(sm) {
+                    @include Theme.for-viewport-down(sm) {
                         align-items: center;
                         text-align: center;
                     }
@@ -107,7 +110,7 @@ section#experience {
 
                 .description {
                     padding-left: 1rem;
-                    border-left: 0.25rem solid theme-background-color(primary);
+                    border-left: 0.25rem solid Theme.theme-background-color(primary);
                 }
 
                 .job {

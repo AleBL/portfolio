@@ -1,14 +1,14 @@
 // Styling for font sizes
 
-@import '../Theme.scss';
+@use '../Theme.scss';
 
-@each $i, $sizes in $font-sizes {
+@each $i, $sizes in Theme.$font-sizes {
     .is-size-#{$i} {
-        @include font-size($i);
+        @include Theme.font-size($i);
     }
 }
 
-@each $name, $weight in $font-weights {
+@each $name, $weight in Theme.$font-weights {
     .is-#{$name}-weight {
         font-weight: $weight;
     }
@@ -44,7 +44,7 @@
 
 .is-quote {
     padding-left: 1rem;
-    border-left: 0.25rem solid theme-background-color(primary);
+    border-left: 0.25rem solid Theme.theme-background-color(primary);
 }
 
 .is-body {
@@ -52,7 +52,7 @@
 }
 
 .is-handwriting {
-    font-family: font-family(handwriting);
+    font-family: Theme.font-family(handwriting);
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -61,84 +61,96 @@ h1, h2, h3, h4, h5, h6, p {
 
 // Typography implementation (for future use?)
 .text-display-4 {
-    @include font-size(1);
-    font-weight: font-weight(light);
+    font-weight: Theme.font-weight(light);
     letter-spacing: -0.01em;
     line-height: 112px;
+
+    @include Theme.font-size(1);
 }
 
 .text-display-3 {
-    @include font-size(2);
-    font-weight: font-weight(normal);
+    font-weight: Theme.font-weight(normal);
     letter-spacing: -0.005em;
     line-height: 58px;
+
+    @include Theme.font-size(2);
 }
 
 .text-display-2 {
-    @include font-size(3);
-    font-weight: font-weight(normal);
+    font-weight: Theme.font-weight(normal);
     letter-spacing: 0;
     line-height: 48px;
+
+    @include Theme.font-size(3);
 }
 
 .text-display-1 {
-    @include font-size(4);
-    font-weight: font-weight(normal);
+    font-weight: Theme.font-weight(normal);
     letter-spacing: 0;
     line-height: 40px;
+
+    @include Theme.font-size(4);
 }
 
 .text-headline {
-    @include font-size(5);
-    font-weight: font-weight(normal);
+    font-weight: Theme.font-weight(normal);
     letter-spacing: 0;
     line-height: 32px;
+
+    @include Theme.font-size(5);
 }
 
 .text-title {
-    @include font-size(6);
-    font-weight: font-weight(semi-bold);
+    font-weight: Theme.font-weight(semi-bold);
     letter-spacing: 0.005em;
     line-height: 26px;
+
+    @include Theme.font-size(6);
 }
 
 .text-subtitle {
-    @include font-size(7);
-    font-weight: font-weight(normal);
+    font-weight: Theme.font-weight(normal);
     letter-spacing: 0.01em;
     line-height: 24px;
+
+    @include Theme.font-size(7);
 }
 
 .text-body-2 {
-    @include font-size(8);
-    font-weight: font-weight(semi-bold);
+    font-weight: Theme.font-weight(semi-bold);
     letter-spacing: 0.01em;
     line-height: 24px;
+
+    @include Theme.font-size(8);
 }
 
 .text-body-1 {
-    @include font-size(8);
-    font-weight: font-weight(normal);
+    font-weight: Theme.font-weight(normal);
     letter-spacing: 0.01em;
     line-height: 20px;
+
+    @include Theme.font-size(8);
 }
 
 .text-caption {
-    @include font-size(9);
-    font-weight: font-weight(normal);
+    font-weight: Theme.font-weight(normal);
     letter-spacing: 0.02em;
     line-height: 17px;
+
+    @include Theme.font-size(9);
 }
 
 .text-link {
-    @include font-size(8);
-    font-weight: font-weight(normal);
+    font-weight: Theme.font-weight(normal);
+
+    @include Theme.font-size(8);
 }
 
 .text-button {
-    @include font-size(8);
-    font-weight: font-weight(normal);
+    font-weight: Theme.font-weight(normal);
     letter-spacing: normal;
     line-height: normal;
     text-transform: uppercase;
+
+    @include Theme.font-size(8);
 }

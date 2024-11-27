@@ -2,12 +2,14 @@
 
 @use 'sass:math';
 
-@import "../Theme";
-@import "Variables";
+@use "sass:color";
+@use "sass:list";
+@use "../Theme";
+@use "Variables";
 
 header.navigation {
     .sections {
-        height: calc(100% - #{$container_size} - 2px);
+        height: calc(100% - #{Variables.$container_size} - 2px);
         width: 100%;
         padding: 0;
         margin: 0;
@@ -24,11 +26,11 @@ header.navigation {
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: font-family(logo);
+            font-family: Theme.font-family(logo);
             text-transform: uppercase;
-            font-weight: font-weight(bold);
-            color: font-color(white);
-            border-bottom: 10px inset shadow(0.35);
+            font-weight: Theme.font-weight(bold);
+            color: Theme.font-color(white);
+            border-bottom: 10px inset Theme.shadow(0.35);
 
             > svg {
                 width: 100% !important;
@@ -49,11 +51,11 @@ header.navigation {
                 projects,
                 education, 
                 connect;
-            $step-size: math.div(360, length($sections));
-            @for $i from 0 to length($sections) {
-                $section: nth($sections, $i + 1);
+            $step-size: math.div(360, list.length($sections));
+            @for $i from 0 to list.length($sections) {
+                $section: list.nth($sections, $i + 1);
                 &[href=\##{$section}] {
-                    background-color: adjust-hue($base-color, $step-size * $i);
+                    background-color: color.adjust($base-color, $hue: $step-size * $i);
                 }
             }
 
@@ -65,17 +67,17 @@ header.navigation {
                 left: 0;
                 transform: translateX(-100%) translateX(16px);
                 width: 100%;
-                background-color: theme-background-color(dark);
+                background-color: Theme.theme-background-color(dark);
                 transition: left 0.5s, transform 0.5s;
                 z-index: 1;
                 text-transform: uppercase;
-                color: font-color(white);
-                font-family: font-family(logo);
+                color: Theme.font-color(white);
+                font-family: Theme.font-family(logo);
                 font-size: 1.15rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border-bottom: 10px inset shadow(0.5);
+                border-bottom: 10px inset Theme.shadow(0.5);
             }
 
             &:hover, &[selected] {

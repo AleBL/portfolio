@@ -1,11 +1,11 @@
 // Styling for the About section
 
-@import "../../Theme";
+@use "../../Theme";
 
 section#about {
-    box-shadow: 0 -40px 30px 0px shadow(0.5);
+    box-shadow: 0 -40px 30px 0px Theme.shadow(0.5);
 
-    @include for-ie {
+    @include Theme.for-ie {
         .about-me {
             min-height: 1px;
 
@@ -23,12 +23,12 @@ section#about {
     }
 
     .flavor {
-        @include drawn-in;
+        @include Theme.drawn-in;
     }
 
     .qualities {
         > * {
-            @include drawn-in;
+            @include Theme.drawn-in;
         }
 
         .icon {

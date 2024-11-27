@@ -1,5 +1,8 @@
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+@use "sass:meta";
 // Variables for the page's overall theme
-
 $root-font-size: 16px;
 
 $theme-colors: (
@@ -46,26 +49,26 @@ $font-sizes: (
 );
 
 @function font-color($color: dark) {
-    @return map-get($font-colors, $color);
+    @return map.get($font-colors, $color);
 }
 
 @function font-weight($weight: normal) {
-    @return map-get($font-weights, $weight);
+    @return map.get($font-weights, $weight);
 }
 
 @function font-family($family: default) {
-    @return map-get($font-families, $family);
+    @return map.get($font-families, $family);
 }
 
 @function get-font-size($i) {
-    @return map-get($font-sizes, $i);
+    @return map.get($font-sizes, $i);
 }
 
 @mixin font-size($i) {
-    $sizes: map-get($font-sizes, $i);
+    $sizes: map.get($font-sizes, $i);
 
-    $size: nth($sizes, 1);
-    $mobile: nth($sizes, 2);
+    $size: list.nth($sizes, 1);
+    $mobile: list.nth($sizes, 2);
 
     font-size: $size;
     @include for-mobile {
@@ -74,7 +77,7 @@ $font-sizes: (
 }
 
 @function theme-color($color) {
-    @return map-get($theme-colors, $color);
+    @return map.get($theme-colors, $color);
 }
 
 $themes: (
@@ -138,14 +141,14 @@ $themes: (
 );
 
 @function theme-background-color($theme) {
-    @return map-get(map-get($themes, $theme), background-color);
+    @return map.get(map.get($themes, $theme), background-color);
 }
 
 @function theme-font-color($theme, $color: null) {
     @if($color == null) {
-        @return map-get(map-get($themes, $theme), color);
+        @return map.get(map.get($themes, $theme), color);
     }
-    @return map-get(map-get(map-get($themes, $theme), colors), $color);
+    @return map.get(map.get(map.get($themes, $theme), colors), $color);
 }
 
 $grid-columns: 12;
@@ -189,25 +192,25 @@ $breakpoints-max: (
 @mixin for-viewport-up($size) {
     // Small devices (landscape phones)
     @if($size == sm) {
-        @media all and (min-width: map-get($breakpoints, sm)) {
+        @media all and (min-width: map.get($breakpoints, sm)) {
             @content;
         }
     }
     // Medium devices (tablets)
     @else if($size == md) {
-        @media all and (min-width: map-get($breakpoints, md)) {
+        @media all and (min-width: map.get($breakpoints, md)) {
             @content;
         }
     }
     // Large devices (desktops)
     @else if($size == lg) {
-        @media all and (min-width: map-get($breakpoints, lg)) {
+        @media all and (min-width: map.get($breakpoints, lg)) {
             @content;
         }
     }
     // Extra large devices (large desktops)
     @else if($size == xl) {
-        @media all and (min-width: map-get($breakpoints, xl)) {
+        @media all and (min-width: map.get($breakpoints, xl)) {
             @content;
         }
     }
@@ -219,25 +222,25 @@ $breakpoints-max: (
 @mixin for-viewport-down($size) {
     
     @if($size == xs) {
-        @media all and (max-width: map-get($breakpoints-max, sm)) {
+        @media all and (max-width: map.get($breakpoints-max, sm)) {
             @content;
         }
     }
     // Small devices (landscape phones)
     @else if($size == sm) {
-        @media all and (max-width: map-get($breakpoints-max, md)) {
+        @media all and (max-width: map.get($breakpoints-max, md)) {
             @content;
         }
     }
     // Medium devices (tablets)
     @else if($size == md) {
-        @media all and (max-width: map-get($breakpoints-max, lg)) {
+        @media all and (max-width: map.get($breakpoints-max, lg)) {
             @content;
         }
     }
     // Large devices (desktops)
     @else if($size == lg) {
-        @media all and (max-width: map-get($breakpoints-max, xl)) {
+        @media all and (max-width: map.get($breakpoints-max, xl)) {
             @content;
         }// Extra small devices (portrait phones)
     }
@@ -249,34 +252,38 @@ $breakpoints-max: (
 @mixin for-viewport-only($size) {
     // Extra small devices (portrait phones)
     @if($size == xs) {
-        @media all and (min-width: map-get($breakpoints, xs)) and (max-width: map-get($breakpoints-max, sm)) {
+        @media all and (min-width: map.get($breakpoints, xs)) and (max-width: map.get($breakpoints-max, sm)) {
             @content;
         }
     }
     // Small devices (landscape phones)
     @if($size == sm) {
-        @media all and (min-width: map-get($breakpoints, sm)) and (max-width: map-get($breakpoints-max, md)) {
+        @media all and (min-width: map.get($breakpoints, sm)) and (max-width: map.get($breakpoints-max, md)) {
             @content;
         }
     }
     // Medium devices (tablets)
     @else if($size == md) {
-        @media all and (min-width: map-get($breakpoints, md)) and (max-width: map-get($breakpoints-max, lg)) {
+        @media all and (min-width: map.get($breakpoints, md)) and (max-width: map.get($breakpoints-max, lg)) {
             @content;
         }
     }
     // Large devices (desktops)
     @else if($size == lg) {
-        @media all and (min-width: map-get($breakpoints, lg)) and (max-width: map-get($breakpoints-max, xl)) {
+        @media all and (min-width: map.get($breakpoints, lg)) and (max-width: map.get($breakpoints-max, xl)) {
             @content;
         }
     }
     // Extra large devices (large desktops)
     @else if($size == xl) {
-        @media all and (min-width: map-get($breakpoints, xl)) {
+        @media all and (min-width: map.get($breakpoints, xl)) {
             @content;
         }
     }
+    @else {
+        @content;
+    }
+    
 }
 
 @mixin for-mobile {
@@ -400,7 +407,7 @@ $elevation-ambient: (
 );
 
 @mixin elevation($z-index: 1) {
-    @if type-of($z-index) != number or not unitless($z-index) {
+    @if meta.type-of($z-index) != number or not math.is-unitless($z-index) {
         @error "$z-index must be a unitless number.";
     }
 
@@ -409,7 +416,7 @@ $elevation-ambient: (
     }
 
     box-shadow: 
-        #{map-get($elevation-umbra, $z-index)} $elevation-umbra-color,
-        #{map-get($elevation-penumbra, $z-index)} $elevation-penumbra-color,
-        #{map-get($elevation-ambient, $z-index)} $elevation-ambient-color;
+        #{map.get($elevation-umbra, $z-index)} $elevation-umbra-color,
+        #{map.get($elevation-penumbra, $z-index)} $elevation-penumbra-color,
+        #{map.get($elevation-ambient, $z-index)} $elevation-ambient-color;
 }

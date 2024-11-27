@@ -1,14 +1,14 @@
 // Styling for the title in the navigation menu
 
-@import "../Theme";
-@import "Variables";
+@use "../Theme";
+@use "Variables";
 
 // Container for the navigation menu's title
 header.navigation div.header {
     background: white;
     list-style-type: none;
-    padding: calc((#{$container-size} - #{$title_size}) / 2) 4rem 0 3rem;
-    height: $container_size;
+    padding: calc((#{Variables.$container-size} - #{Variables.$title_size}) / 2) 4rem 0 3rem;
+    height: Variables.$container_size;
     user-select: none;
     -webkit-user-select: none;
 }
@@ -29,9 +29,9 @@ header.navigation div.header {
 .navigation .header .title .text {
     $font-size: 0.825rem;
     font-size: $font-size;
-    color: font-color(dark);
-    font-weight: font-weight(bold);
-    font-family: font-family(logo);
+    color: Theme.font-color(dark);
+    font-weight: Theme.font-weight(bold);
+    font-family: Theme.font-family(logo);
     text-transform: uppercase;
     line-height: 0.825rem;
 }
@@ -40,6 +40,6 @@ header.navigation div.header {
 .navigation hr {
     margin: 0 auto;
     border: none;
-    background-color: shadow(0.1);
+    background-color: Theme.shadow(0.1);
     height: 3px;
 }
