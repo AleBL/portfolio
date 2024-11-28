@@ -186,43 +186,43 @@ export const Skills: SkillData[] = [
     {
         name: 'Ruby',
         svg: 'ruby',
-        color: '#A52A2A',
+        color: '#D91404',
         category: SkillCategory.Programming,
     },
     {
         name: 'Rails',
         svg: 'rails',
-        color: '#232F3E',
+        color: '#c00',
         category: SkillCategory.Framework,
     },
     {
         name: 'Sidekiq',
         svg: 'sidekiq',
-        color: '#232F3E',
+        color: '#991B21',
         category: SkillCategory.Server | SkillCategory.DevOps,
     },
     {
         name: 'GitHub Actions',
         svg: 'github-actions',
-        color: '#232F3E',
+        color: '#2088ff',
         category: SkillCategory.DevOps,
     },
     {
         name: 'JWT',
         svg: 'jwt',
-        color: '#232F3E',
+        color: '#546e7a',
         category: SkillCategory.Web,
     },
     {
         name: 'RSpec',
         svg: 'rspec',
-        color: '#232F3E',
+        color: '#175f96',
         category: SkillCategory.Framework,
     },
     {
         name: 'Webpack',
         svg: 'webpack',
-        color: '#232F3E',
+        color: '#1c78c0',
         category: SkillCategory.Web,
     },
     {
@@ -260,7 +260,97 @@ export const Skills: SkillData[] = [
         svg: 'vue',
         color: '#4FC08D',
         category: SkillCategory.Web | SkillCategory.Framework,
-    }
+    },
+    {
+        name: 'GraphQL',
+        svg: 'graphql',
+        color: '#E535AB',
+        category: SkillCategory.Web,
+    },
+    {
+        name: 'Rubocop',
+        svg: 'rubocop',
+        color: '#2B3539',
+        category: SkillCategory.Programming,
+    },
+    {
+        name: 'Azure',
+        svg: 'azure',
+        color: '#0072c6',
+        category: SkillCategory.DevOps,
+    },
+    {
+        name: 'Haskell',
+        svg: 'haskell',
+        color: '#5D4F85',
+        category: SkillCategory.Programming,
+    },
+    {
+        name: 'ESLint',
+        svg: 'eslint',
+        color: '#4B32C3',
+        category: SkillCategory.Web,
+    },
+    {
+        name: 'MySQL',
+        svg: 'mysql',
+        color: '#4479A1',
+        category: SkillCategory.Database,
+    },
+    {
+        name: 'Visual Studio',
+        svg: 'visualstudio',
+        color: '#5C2D91',
+        category: SkillCategory.Other,
+    },
+    {
+        name: 'SQLite',
+        svg: 'sqlite',
+        color: '#003B57',
+        category: SkillCategory.Database,
+    },
+    {
+        name: 'npm',
+        svg: 'npm',
+        color: '#CB3837',
+        category: SkillCategory.Other,
+    },
+    {
+        name: 'OpenSSL',
+        svg: 'openssl',
+        color: '#721412',
+        category: SkillCategory.Framework,
+    },
+    {
+        name: 'Visual Studio Code',
+        svg: 'visualstudiocode',
+        color: '#007ACC',
+        category: SkillCategory.Other,
+    },
+    {
+        name: 'Vite',
+        svg: 'vite',
+        color: '#bd34fe',
+        category: SkillCategory.Other,
+    },
+    {
+        name: 'Tailwind CSS',
+        svg: 'tailwindcss',
+        color: '#38bdf8',
+        category: SkillCategory.Other,
+    },
+    {
+        name: 'ElectronJS',
+        svg: 'electronjs',
+        color: '#47848f',
+        category: SkillCategory.Other,
+    },
+    {
+        name: 'Bootstrap',
+        svg: 'bootstrap',
+        color: '#563D7C',
+        category: SkillCategory.Other,
+    },
 ];
 
 export const NonSkills: SkillData[] = [
@@ -312,12 +402,7 @@ export const NonSkills: SkillData[] = [
         color: '#5865F2',
         category: SkillCategory.Other,
     },
-    {
-        name: 'ESLint',
-        svg: 'eslint',
-        color: '#4B32C3',
-        category: SkillCategory.Web,
-    },
+
     {
         name: 'Facebook',
         svg: 'facebook',
@@ -365,12 +450,6 @@ export const NonSkills: SkillData[] = [
         svg: 'chrome',
         color: '#4285F4',
         category: SkillCategory.Other,
-    },
-    {
-        name: 'Haskell',
-        svg: 'haskell',
-        color: '#5D4F85',
-        category: SkillCategory.Programming,
     },
     {
         name: 'Honda',
@@ -421,12 +500,6 @@ export const NonSkills: SkillData[] = [
         category: SkillCategory.Other,
     },
     {
-        name: 'MySQL',
-        svg: 'mysql',
-        color: '#4479A1',
-        category: SkillCategory.Database,
-    },
-    {
         name: 'Nike',
         svg: 'nike',
         color: '#111111',
@@ -448,12 +521,6 @@ export const NonSkills: SkillData[] = [
         name: 'Nintendo Switch',
         svg: 'nintendoswitch',
         color: '#E60012',
-        category: SkillCategory.Other,
-    },
-    {
-        name: 'npm',
-        svg: 'npm',
-        color: '#CB3837',
         category: SkillCategory.Other,
     },
     {
@@ -505,12 +572,6 @@ export const NonSkills: SkillData[] = [
         category: SkillCategory.Other,
     },
     {
-        name: 'SQLite',
-        svg: 'sqlite',
-        color: '#003B57',
-        category: SkillCategory.Database,
-    },
-    {
         name: 'Subaru',
         svg: 'subaru',
         color: '#013C74',
@@ -522,6 +583,7 @@ export const NonSkills: SkillData[] = [
         color: '#FFB13B',
         category: SkillCategory.Other,
     },
+    
     {
         name: 'Taco Bell',
         svg: 'tacobell',
@@ -564,18 +626,7 @@ export const NonSkills: SkillData[] = [
         color: '#CD040B',
         category: SkillCategory.Other,
     },
-    {
-        name: 'Visual Studio',
-        svg: 'visualstudio',
-        color: '#5C2D91',
-        category: SkillCategory.Other,
-    },
-    {
-        name: 'Visual Studio Code',
-        svg: 'visualstudiocode',
-        color: '#007ACC',
-        category: SkillCategory.Other,
-    },
+
     {
         name: 'WebAssembly',
         svg: 'webassembly',
