@@ -154,6 +154,10 @@ section#skills {
                 >svg.icon {
                     color: inherit;
                 }
+
+                .filled {
+                    fill: Theme.theme-background-color(secondary);
+                }
             }
         }
     }
