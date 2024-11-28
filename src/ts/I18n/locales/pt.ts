@@ -40,9 +40,22 @@ const pt = {
             },
         },
         skills: {
+            filter: "Filtrar:",
             title: "Habilidades",
             short_text:
                 "Trabalhei com várias áreas diferentes de tecnologia, mas estou sempre procurando explorar coisas novas e usar a tecnologia de novas maneiras. <br/><br/>Tenho experiência no desenvolvimento backend, criação de APIs, otimização de performance de aplicações e habilidades full stack.",
+            categories: {
+                none: "Nenhum",
+                programming: "Programação",
+                scripting: "Script",
+                web: "Web",
+                server: "Servidor",
+                database: "Banco de Dados",
+                devOps: "DevOps",
+                framework: "Framework",
+                testing: "Testes",
+                other: "Outros"
+            }
         },
         experience: {
             title: "Experiência",

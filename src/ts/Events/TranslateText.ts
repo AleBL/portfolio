@@ -18,4 +18,5 @@ document.addEventListener('DOMContentLoaded', () => {
     changeText("my_position_div", "my_position");
     changeText("hello_alessandro_h1", "hello_alessandro");
     changeText("skill_short_text_p", "sections.skills.short_text");
+    changeText("skill_filter_p", "sections.skills.filter");
 });

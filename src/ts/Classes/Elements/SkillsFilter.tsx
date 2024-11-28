@@ -5,6 +5,7 @@ import { DOM } from '../../Modules/DOM'
 import { Skill, SkillCategory, SkillData } from './Skill'
 import { SkillsGrid, ScrollHook, KeyCodeCombos } from '../../Modules/WebPage'
 import { NonSkills, Skills } from '../../Data/Skills'
+import { i18next } from '../../I18n/i18n'
 
 // Class for managing SkillsFilter dropdown
 export class SkillsFilter {
@@ -31,9 +32,10 @@ export class SkillsFilter {
         .filter(([key, val]) => !isNaN(Number(key)))
         // Reduce back to option
         .reduce((obj, [key, val]) => {
+            const lowerCaseVal = String(val).toLowerCase();
             return {
                 ...obj,
-                [key]: val,
+                [key]: i18next.t(`sections.skills.categories.${lowerCaseVal}`),
             };
         }, { });
 
@@ -90,7 +92,7 @@ export class SkillsFilter {
         // No filter => show all skills
         if (this.filter === 0) {
             this.skillElements.forEach(skill => skill.appendTo(SkillsGrid));
-            this.SelectedOptionsDisplay.innerText = 'None';
+            this.SelectedOptionsDisplay.innerText = i18next.t('sections.skills.categories.none');
         }
         else {
             this.skillElements.filter(skill => (skill.getCategory() & this.filter) !== 0)
