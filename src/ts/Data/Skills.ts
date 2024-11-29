@@ -34,6 +34,18 @@ export const Skills: SkillData[] = [
         category: SkillCategory.Web | SkillCategory.Programming | SkillCategory.Scripting,
     },
     {
+        name: 'Angular',
+        svg: 'angular',
+        color: '#DD0031',
+        category: SkillCategory.Web | SkillCategory.Framework,
+    },
+    {
+        name: 'NestJS',
+        svg: 'nestjs',
+        color: '#DF234F',
+        category: SkillCategory.Web | SkillCategory.Framework,
+    },
+    {
         name: 'Python',
         svg: 'python',
         color: '#3776AB',
