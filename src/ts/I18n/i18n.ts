@@ -19,7 +19,7 @@ const availableLanguages = Object.keys(resources);
 
 const initI18n = () => {
     i18next.init({
-        lng: availableLanguages.includes(language) ? language : "en",
+        lng: availableLanguages.includes(language) ? language : "pt",
         resources: resources,
     });
 };

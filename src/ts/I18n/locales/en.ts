@@ -41,8 +41,21 @@ const en = {
         },
         skills: {
             title: "Skills",
+            filter: "Filter:",
             short_text:
                 "I've worked in a variety of different areas of technology, but I'm always looking to explore new things and use technology in new ways. <br/><br/>I have experience in backend development, API creation, application performance optimization, and full stack skills.",
+            categories: {
+                none: "None",
+                programming: "Programming",
+                scripting: "Scripting",
+                web: "Web",
+                server: "Server",
+                database: "Database",
+                devOps: "DevOps",
+                framework: "Framework",
+                testing: "Testing",
+                other: "Other"
+            }
         },
         experience: {
             title: "Experience",
