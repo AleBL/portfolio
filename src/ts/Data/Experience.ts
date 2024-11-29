@@ -1,10 +1,30 @@
 // Data for Experience cards
 
-import { ExperienceData } from '../Classes/Elements/Experience'
+import { ExperienceData } from '../Classes/Elements/Experience';
 import { i18next } from '../I18n/i18n';
 
-const Companies = {
-    Manusis: {
+const formatDateForExperience = (data: string) => {
+    const [month, year] = data.split('/').map(Number);
+    const date = new Date(year, month - 1);
+    const language = i18next.language;
+
+    return new Intl.DateTimeFormat(language, {
+        month: 'long',
+        year: 'numeric',
+    }).format(date);
+};
+
+interface Company {
+    svg: string;
+    link: string;
+    company: string;
+    location: string;
+    flavor: string;
+    [key: string]: any;  // To allow dynamic squads
+}
+
+const Companies: Record<string, Company> = {
+    manusis: {
         svg: 'manusis',
         link: 'https://manusis4.com.br/',
         company: 'Manusis',
@@ -26,7 +46,7 @@ const Companies = {
             work_mode: "remote"
         },
     },
-    Stefanini: {
+    stefanini: {
         svg: 'stefanini',
         link: 'https://stefanini.com/',
         company: 'Stefanini',
@@ -38,7 +58,7 @@ const Companies = {
             work_mode: "remote"
         },
     },
-    James: {
+    james: {
         svg: 'james',
         link: 'https://www.jamesdelivery.com.br/',
         company: 'James Delivery',
@@ -50,7 +70,7 @@ const Companies = {
             work_mode: "remote"
         },
     },
-    TeresinaCityHall: {
+    teresina_city_hall: {
         svg: 'prefeitura_teresina',
         link: 'https://pmt.pi.gov.br/teresinensedigital/financas/',
         company: i18next.t('sections.experience.teresina_city_hall.name'),
@@ -62,114 +82,66 @@ const Companies = {
             work_mode: "in_person"
         },
     }
-}
+};
 
-const formatData = (data: string) => {
-    const [month, year] = data.split('/').map(Number);
-    const date = new Date(year, month - 1);
-    const language = i18next.language;
+type SquadKeys = 'rds_squad' | 'prs_squad' | 'sts_squad' | 'vale_team' | 'payment_squad' | 'finance_department_team';
 
-    return new Intl.DateTimeFormat(language, {
-        month: 'long',
-        year: 'numeric',
-    }).format(date);
+const createExperience = ({
+    companyKey,
+    squadKey,
+    collapse = false
+}: {
+    companyKey: keyof typeof Companies;
+    squadKey: SquadKeys;
+    collapse?: boolean;
+}): ExperienceData => {
+    const company = Companies[companyKey];
+    const squad = company[squadKey];
+
+    const rolesI18n = i18next.getResourceBundle(i18next.language, 'translation').sections.experience[companyKey][squadKey].roles
+    return {
+        collapse,
+        svg: company.svg,
+        link: company.link,
+        company: company.company,
+        location: `${company.location} - ${i18next.t(`sections.experience.work_mode.${squad.work_mode}`)}`,
+        flavor: company.flavor,
+        team: i18next.t(`sections.experience.${companyKey}.${squadKey}.name`),
+        position: i18next.t(`sections.experience.${companyKey}.${squadKey}.position`),
+        begin: formatDateForExperience(squad.begin),
+        end: formatDateForExperience(squad.end),
+        roles: Object.values(rolesI18n).map((role: string) => role)
+    };
 };
 
 export const Experience: ExperienceData[] = [
-    {
-        svg: Companies.Manusis.svg,
-        ...Companies.Manusis,
-        team: i18next.t('sections.experience.manusis.rds_squad.name'),
-        position: i18next.t('sections.experience.manusis.rds_squad.position'),
-        location: `${Companies.Manusis.location} - ${i18next.t(`sections.experience.work_mode.${Companies.Manusis.rds_squad.work_mode}`)}`,
-        begin: formatData(Companies.Manusis.rds_squad.begin),
-        end: formatData(Companies.Manusis.rds_squad.end),
-        roles: [
-            i18next.t('sections.experience.manusis.rds_squad.roles.0'),
-            i18next.t('sections.experience.manusis.rds_squad.roles.1'),
-            i18next.t('sections.experience.manusis.rds_squad.roles.2'),
-            i18next.t('sections.experience.manusis.rds_squad.roles.3'),
-            i18next.t('sections.experience.manusis.rds_squad.roles.4'),
-        ]
-    },
-    {
-        collapse: true,
-        ...Companies.Manusis,
-        team: i18next.t('sections.experience.manusis.prs_squad.name'),
-        position: i18next.t('sections.experience.manusis.prs_squad.position'),
-        location: `${Companies.Manusis.location} - ${i18next.t(`sections.experience.work_mode.${Companies.Manusis.rds_squad.work_mode}`)}`,
-        begin: formatData(Companies.Manusis.prs_squad.begin),
-        end: formatData(Companies.Manusis.prs_squad.end),
-        roles: [
-            i18next.t('sections.experience.manusis.prs_squad.roles.0'),
-            i18next.t('sections.experience.manusis.prs_squad.roles.1'),
-            i18next.t('sections.experience.manusis.prs_squad.roles.2'),
-            i18next.t('sections.experience.manusis.rds_squad.roles.3'),
-            i18next.t('sections.experience.manusis.rds_squad.roles.4'),
-        ]
-    },
-    {
-        collapse: true,
-        ...Companies.Manusis,
-        team: i18next.t('sections.experience.manusis.sts_squad.name'),
-        location: `${Companies.Manusis.location} - ${i18next.t(`sections.experience.work_mode.${Companies.Manusis.rds_squad.work_mode}`)}`,
-        position: i18next.t('sections.experience.sts_squad.position'),
-        begin: formatData(Companies.Manusis.sts_squad.begin),
-        end: formatData(Companies.Manusis.sts_squad.end),
-
-        roles: [
-            i18next.t('sections.experience.manusis.sts_squad.roles.0'),
-            i18next.t('sections.experience.manusis.sts_squad.roles.1'),
-        ]
-    },
-    {
-        collapse: true,
-        ...Companies.Stefanini,
-        team: i18next.t('sections.experience.stefanini.vale_team.name'),
-        location: `${Companies.Stefanini.location} - ${i18next.t(`sections.experience.work_mode.${Companies.Stefanini.vale_team.work_mode}`)}`,
-        position: i18next.t('sections.experience.stefanini.vale_team.position'),
-        begin: formatData(Companies.Stefanini.vale_team.begin),
-        end: formatData(Companies.Stefanini.vale_team.end),
-        roles: [
-            i18next.t('sections.experience.stefanini.vale_team.roles.0'),
-            i18next.t('sections.experience.stefanini.vale_team.roles.1'),
-            i18next.t('sections.experience.stefanini.vale_team.roles.2'),
-            i18next.t('sections.experience.stefanini.vale_team.roles.3'),
-            i18next.t('sections.experience.stefanini.vale_team.roles.4'),
-            i18next.t('sections.experience.stefanini.vale_team.roles.5'),
-            i18next.t('sections.experience.stefanini.vale_team.roles.6'),
-        ]
-    },
-    {
-        collapse: true,
-        ...Companies.James,
-        team: i18next.t('sections.experience.james.payment_squad.name'),
-        location: `${Companies.James.location} - ${i18next.t(`sections.experience.work_mode.${Companies.James.payment_squad.work_mode}`)}`,
-        position: i18next.t('sections.experience.james.payment_squad.position'),
-        begin: formatData(Companies.James.payment_squad.begin),
-        end: formatData(Companies.James.payment_squad.end),
-        roles: [
-            i18next.t('sections.experience.james.payment_squad.roles.0'),
-            i18next.t('sections.experience.james.payment_squad.roles.1'),
-            i18next.t('sections.experience.james.payment_squad.roles.2'),
-            i18next.t('sections.experience.james.payment_squad.roles.3'),
-        ]
-    },
-    {
-        collapse: true,
-        ...Companies.TeresinaCityHall,
-        team: i18next.t('sections.experience.teresina_city_hall.finance_department_team.name'),
-        location: `${Companies.TeresinaCityHall.location} - ${i18next.t(`sections.experience.work_mode.${Companies.TeresinaCityHall.finance_department_team.work_mode}`)}`,
-        position: i18next.t('sections.experience.teresina_city_hall.finance_department_team.position'),
-        begin: formatData(Companies.TeresinaCityHall.finance_department_team.begin),
-        end: formatData(Companies.TeresinaCityHall.finance_department_team.end),
-        roles: [
-            i18next.t('sections.experience.teresina_city_hall.finance_department_team.roles.0'),
-            i18next.t('sections.experience.teresina_city_hall.finance_department_team.roles.1'),
-            i18next.t('sections.experience.teresina_city_hall.finance_department_team.roles.2'),
-            i18next.t('sections.experience.teresina_city_hall.finance_department_team.roles.3'),
-            i18next.t('sections.experience.teresina_city_hall.finance_department_team.roles.4'),
-            i18next.t('sections.experience.teresina_city_hall.finance_department_team.roles.5'),
-        ]
-    }
-]
+    createExperience({
+        companyKey: 'manusis',
+        squadKey: 'rds_squad',
+    }),
+    createExperience({
+        companyKey: 'manusis',
+        squadKey: 'prs_squad',
+        collapse: true
+    }),
+    createExperience({
+        companyKey: 'manusis',
+        squadKey: 'sts_squad',
+        collapse: true
+    }),
+    createExperience({
+        companyKey: 'stefanini',
+        squadKey: 'vale_team',
+        collapse: true
+    }),
+    createExperience({
+        companyKey: 'james',
+        squadKey: 'payment_squad',
+        collapse: true
+    }),
+    createExperience({
+        companyKey: 'teresina_city_hall',
+        squadKey: 'finance_department_team',
+        collapse: true
+    })
+];
