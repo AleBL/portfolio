@@ -26,7 +26,10 @@ export class Experience extends DataComponent<ExperienceData> {
     private collapsed: boolean;
 
     private beforeCreate(): void {
-        if (this.data.collapse === undefined) {
+        if (this.data.collapse === undefined ||
+            this.data.collapse === null ||
+            this.data.collapse === false
+        ) {
             this.collapsible = false;
             this.collapsed = false;
         } else {
