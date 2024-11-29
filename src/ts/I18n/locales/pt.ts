@@ -51,7 +51,7 @@ const pt = {
                 web: "Web",
                 server: "Servidor",
                 database: "Banco de Dados",
-                devOps: "DevOps",
+                devops: "DevOps",
                 framework: "Framework",
                 testing: "Testes",
                 other: "Outros"

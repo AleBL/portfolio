@@ -51,7 +51,7 @@ const en = {
                 web: "Web",
                 server: "Server",
                 database: "Database",
-                devOps: "DevOps",
+                devops: "DevOps",
                 framework: "Framework",
                 testing: "Testing",
                 other: "Other"
