@@ -36,25 +36,13 @@ const Companies: Record<string, Company> = {
             work_mode: "remote"
         },
         prs_squad: {
-            begin: "02/2022",
+            begin: "07/2022",
             end: "03/2023",
             work_mode: "remote"
         },
         sts_squad: {
             begin: "10/2021",
-            end: "02/2022",
-            work_mode: "remote"
-        },
-    },
-    stefanini: {
-        svg: 'stefanini',
-        link: 'https://stefanini.com/',
-        company: 'Stefanini',
-        location: "Rio de Janeiro, Rio de Janeiro, Brasil",
-        flavor: i18next.t('sections.experience.stefanini.text'),
-        vale_team: {
-            begin: "12/2021",
-            end: "01/2022",
+            end: "07/2022",
             work_mode: "remote"
         },
     },
@@ -65,8 +53,20 @@ const Companies: Record<string, Company> = {
         location: "Curitiba, Paraná, Brasil",
         flavor: i18next.t('sections.experience.james.text'),
         payment_squad: {
-            begin: "01/2019",
-            end: "10/2021",
+            begin: "04/2020",
+            end: "08/2022",
+            work_mode: "remote"
+        },
+    },
+    stefanini: {
+        svg: 'stefanini',
+        link: 'https://stefanini.com/',
+        company: 'Stefanini',
+        location: "Rio de Janeiro, Rio de Janeiro, Brasil",
+        flavor: i18next.t('sections.experience.stefanini.text'),
+        vale_team: {
+            begin: "11/2018",
+            end: "01/2020",
             work_mode: "remote"
         },
     },
@@ -77,8 +77,8 @@ const Companies: Record<string, Company> = {
         location: "Teresina, Piauí, Brasil",
         flavor: i18next.t('sections.experience.teresina_city_hall.text'),
         finance_department_team: {
-            begin: "10/2017",
-            end: "10/2020",
+            begin: "07/2016",
+            end: "10/2018",
             work_mode: "in_person"
         },
     }
@@ -130,13 +130,13 @@ export const Experience: ExperienceData[] = [
         collapse: true
     }),
     createExperience({
-        companyKey: 'stefanini',
-        squadKey: 'vale_team',
+        companyKey: 'james',
+        squadKey: 'payment_squad',
         collapse: true
     }),
     createExperience({
-        companyKey: 'james',
-        squadKey: 'payment_squad',
+        companyKey: 'stefanini',
+        squadKey: 'vale_team',
         collapse: true
     }),
     createExperience({
