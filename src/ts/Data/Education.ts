@@ -4,43 +4,22 @@ import { EducationData } from '../Classes/Elements/Education'
 
 export const Education: EducationData[] = [
     {
-        name: 'The University of Texas at Dallas',
-        color: '#C75B12',
-        image: 'utd.svg',
-        link: 'https://utdallas.edu',
-        location: 'Richardson, TX, USA',
-        degree: 'Master of Science in Computer Science',
-        start: 'Spring 2021',
-        end: 'Summer 2022',
+        name: 'Universidade Estadual do Piaui',
+        color: '#005A9C',
+        image: 'university.svg',
+        link: 'https://www.uespi.br/',
+        location: 'Teresina, PI, Brasil',
+        degree: 'Bacharelado em Ciencias da Computacao',
+        start: 'Marco de 2015',
+        end: 'Novembro de 2020',
         credits: {
-            total: 33,
-            completed: 33,
+            total: 240,
+            completed: 0,
             taking: 0,
         },
-        gpa: '4.0',
+        gpa: '-',
         notes: [
-            'Systems Track',
-            'Jonsson School Fast-Track Program'
-        ],
-    },
-    {
-        name: 'The University of Texas at Dallas',
-        color: '#C75B12',
-        image: 'utd.svg',
-        link: 'https://utdallas.edu',
-        location: 'Richardson, TX, USA',
-        degree: 'Bachelor of Science in Computer Science',
-        start: 'Fall 2018',
-        end: 'Fall 2021',
-        credits: {
-            total: 124,
-            completed: 124,
-            taking: 0,
-        },
-        gpa: '4.0',
-        notes: [
-            'Summa Cum Laude',
-            'Collegium V Honors',
+            'Curso concluido'
         ],
     }
 ];

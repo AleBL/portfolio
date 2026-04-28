@@ -1,0 +1,27 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="40" x2="900" y2="500" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="card" x1="220" y1="130" x2="760" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="1" stop-color="#1F2937"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="960" height="540" fill="url(#bg)"/>
+  <circle cx="810" cy="110" r="90" fill="#60A5FA" fill-opacity="0.15"/>
+  <circle cx="150" cy="470" r="120" fill="#93C5FD" fill-opacity="0.13"/>
+  <rect x="190" y="110" width="580" height="320" rx="24" fill="url(#card)" stroke="#93C5FD" stroke-opacity="0.35"/>
+  <rect x="240" y="170" width="300" height="18" rx="9" fill="#BFDBFE" fill-opacity="0.9"/>
+  <rect x="240" y="206" width="200" height="12" rx="6" fill="#BFDBFE" fill-opacity="0.45"/>
+  <rect x="240" y="246" width="480" height="10" rx="5" fill="#93C5FD" fill-opacity="0.25"/>
+  <rect x="240" y="268" width="420" height="10" rx="5" fill="#93C5FD" fill-opacity="0.2"/>
+  <rect x="240" y="290" width="360" height="10" rx="5" fill="#93C5FD" fill-opacity="0.18"/>
+  <g transform="translate(640 168)">
+    <circle cx="55" cy="55" r="55" fill="#1E3A8A"/>
+    <path d="M55 22C36.78 22 22 36.78 22 55C22 69.58 31.46 81.96 44.58 86.33C46.23 86.62 46.83 85.63 46.83 84.8V79.64C37.67 81.63 35.74 75.78 35.74 75.78C34.24 71.97 32.08 70.95 32.08 70.95C29.08 68.89 32.31 68.93 32.31 68.93C35.63 69.16 37.37 72.35 37.37 72.35C40.32 77.39 45.11 75.94 47.07 75.1C47.37 72.96 48.22 71.5 49.15 70.68C41.83 69.85 34.13 67.03 34.13 54.42C34.13 50.83 35.42 47.9 37.55 45.61C37.21 44.78 36.08 41.44 37.87 36.93C37.87 36.93 40.63 36.06 46.8 40.24C49.43 39.51 52.25 39.15 55.07 39.14C57.89 39.15 60.71 39.51 63.34 40.24C69.51 36.06 72.27 36.93 72.27 36.93C74.06 41.44 72.93 44.78 72.59 45.61C74.72 47.9 76.01 50.83 76.01 54.42C76.01 67.06 68.29 69.84 60.94 70.65C62.11 71.67 63.15 73.66 63.15 76.72V84.8C63.15 85.64 63.75 86.64 65.42 86.33C78.54 81.95 88 69.58 88 55C88 36.78 73.22 22 55 22Z" fill="#DBEAFE"/>
+  </g>
+  <text x="240" y="350" fill="#E5E7EB" font-size="34" font-family="Verdana, sans-serif" font-weight="700">Projetos no GitHub</text>
+  <text x="240" y="388" fill="#93C5FD" font-size="20" font-family="Verdana, sans-serif">Repositorio | Codigo | Deploy</text>
+</svg>

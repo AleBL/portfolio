@@ -64,8 +64,17 @@ const pt = {
                 remote: "Remoto",
                 in_person: "Presencial",
             },
+            present: "Atualmente",
             manusis: {
                 text:' Manusis4 é uma empresa especializada em soluções de gestão de manutenção e ativos, fornecendo ferramentas para otimização de processos, manutenção preventiva, controle de inventário e integração com sistemas ERP e IoT, visando aumentar a eficiência e reduzir custos operacionais.',
+                sts_squad_two: {
+                    name: "STS (Time de Sustentação)",
+                    position: "Desenvolvedor Pleno Full Stack",
+                    roles: {
+                        0: "Retorno ao time de sustentação, atuando na continuidade e evolução do produto.",
+                        1: "Atuação focada em correções críticas, ajustes de regra de negócio e estabilidade da aplicação.",
+                    },
+                },
                 rds_squad: {
                     name: "RDS (Time de Pesquisa e Desenvolvimento)",
                     position: "Desenvolvedor Pleno Full Stack",

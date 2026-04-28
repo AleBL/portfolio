@@ -64,8 +64,17 @@ const en = {
                 remote: "Remote",
                 in_person: "In-Person",
             },
+            present: "Present",
             manusis: {
                 text: "Manusis4 is a company specialized in maintenance and asset management solutions, providing tools for process optimization, preventive maintenance, inventory control, and integration with ERP and IoT systems, aiming to increase efficiency and reduce operational costs.",
+                sts_squad_two: {
+                    name: "STS (Sustaining Squad)",
+                    position: "Mid-Level Full Stack Developer",
+                    roles: {
+                        0: "Returned to the sustaining squad, contributing to product continuity and evolution.",
+                        1: "Focused on critical bug fixes, business rule adjustments, and application stability.",
+                    },
+                },
                 rds_squad: {
                     name: "RDS (Research and Development Squad)",
                     position: "Mid-Level Full Stack Developer",

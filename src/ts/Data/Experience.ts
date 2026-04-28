@@ -14,13 +14,27 @@ const formatDateForExperience = (data: string) => {
     }).format(date);
 };
 
+const formatEndDateForExperience = (data?: string) => {
+    if (!data) {
+        return i18next.t('sections.experience.present');
+    }
+
+    return formatDateForExperience(data);
+};
+
+interface Squad {
+    begin: string;
+    end?: string;
+    work_mode: 'remote' | 'in_person';
+}
+
 interface Company {
     svg: string;
     link: string;
     company: string;
     location: string;
     flavor: string;
-    [key: string]: any;  // To allow dynamic squads
+    [key: string]: string | Squad | undefined;
 }
 
 const Companies: Record<string, Company> = {
@@ -30,6 +44,10 @@ const Companies: Record<string, Company> = {
         company: 'Manusis',
         location: "Curitiba, Paraná, Brasil",
         flavor: i18next.t('sections.experience.manusis.text'),
+        sts_squad_two: {
+            begin: "02/2025",
+            work_mode: "remote"
+        },
         rds_squad: {
             begin: "03/2023",
             end: "11/2024",
@@ -84,7 +102,7 @@ const Companies: Record<string, Company> = {
     }
 };
 
-type SquadKeys = 'rds_squad' | 'prs_squad' | 'sts_squad' | 'vale_team' | 'payment_squad' | 'finance_department_team';
+type SquadKeys = 'sts_squad_two' | 'rds_squad' | 'prs_squad' | 'sts_squad' | 'vale_team' | 'payment_squad' | 'finance_department_team';
 
 const createExperience = ({
     companyKey,
@@ -96,9 +114,9 @@ const createExperience = ({
     collapse?: boolean;
 }): ExperienceData => {
     const company = Companies[companyKey];
-    const squad = company[squadKey];
+    const squad = company[squadKey] as Squad;
 
-    const rolesI18n = i18next.getResourceBundle(i18next.language, 'translation').sections.experience[companyKey][squadKey].roles
+    const rolesI18n = i18next.getResourceBundle(i18next.language, 'translation').sections.experience[companyKey][squadKey].roles as Record<string, string>;
     return {
         collapse,
         svg: company.svg,
@@ -109,15 +127,20 @@ const createExperience = ({
         team: i18next.t(`sections.experience.${companyKey}.${squadKey}.name`),
         position: i18next.t(`sections.experience.${companyKey}.${squadKey}.position`),
         begin: formatDateForExperience(squad.begin),
-        end: formatDateForExperience(squad.end),
-        roles: Object.values(rolesI18n).map((role: string) => role)
+        end: formatEndDateForExperience(squad.end),
+        roles: Object.values(rolesI18n)
     };
 };
 
 export const Experience: ExperienceData[] = [
     createExperience({
         companyKey: 'manusis',
+        squadKey: 'sts_squad_two',
+    }),
+    createExperience({
+        companyKey: 'manusis',
         squadKey: 'rds_squad',
+        collapse: true
     }),
     createExperience({
         companyKey: 'manusis',

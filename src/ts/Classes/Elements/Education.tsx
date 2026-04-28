@@ -90,39 +90,6 @@ export class Education extends DataComponent<EducationData> {
                                 </div>
                             </div>
                         </div>
-                        <div className={`progress flex row xs-nowrap xs-y-center progress-bar-hover-container${!this.isComplete() ? ' incomplete' : ''}`}>
-                            <div className="progress-bar">
-                                <div className="completed marker" style={{ opacity: 0 }} ref="completedMarker">
-                                    <p className="is-size-8">{this.data.credits.completed}</p>
-                                </div>
-                                <div className="taking marker" style={{ opacity: 0 }} ref="takingMarker">
-                                    <p className="is-size-8">{this.data.credits.completed + this.data.credits.taking}</p>
-                                </div>
-                                <div className="track"></div>
-                                <div className="buffer" ref="takingTrack"></div>
-                                <div className="fill" ref="completedTrack"></div>
-                            </div>
-                            <p className="credits is-size-8 xs-auto">{this.data.credits.total} credits</p>
-                        </div>
-                        <div className="info content padding-x-4 padding-y-2">
-                            <p className="is-light-color is-size-8 is-italic">
-                                <span className="is-bold-weight">GPA:</span>&nbsp;{this.data.gpa}
-                            </p>
-                            {this.data.notes.map(note => {
-                                return <p className="is-light-color is-size-8 is-italic">{note}</p>
-                            })}
-                            {!this.data.courses ? null : <div>
-                                <hr />
-                                <div className="courses">
-                                    <p className="is-bold-weight is-size-6">Recent Coursework</p>
-                                    <ul className="flex row is-size-7">
-                                        {this.data.courses.map(course => {
-                                            return <li className="xs-12 md-6">{course}</li>
-                                        })}
-                                    </ul>
-                                </div>
-                            </div>}
-                        </div>
                     </div>
                 </div>
             </div>
