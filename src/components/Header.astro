@@ -1,0 +1,302 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import logo from '../assets/brand/logo.png';
+import { profile } from '../data/content';
+import { homePath, ui, type Lang } from '../i18n';
+
+interface Props {
+    lang: Lang;
+    /** On the home page links are anchors; elsewhere they point back to the home page. */
+    onHome?: boolean;
+}
+
+const { lang, onHome = true } = Astro.props;
+const t = ui[lang];
+const other: Lang = lang === 'pt' ? 'en' : 'pt';
+const base = onHome ? '' : homePath[lang];
+
+const links = [
+    { id: 'about', label: t.nav.about },
+    { id: 'experience', label: t.nav.experience },
+    { id: 'projects', label: t.nav.projects },
+    { id: 'skills', label: t.nav.skills },
+    { id: 'contact', label: t.nav.contact },
+];
+---
+
+<a class="skip-link" href="#main-content">
+    {t.skipToContent}
+</a>
+
+<header class="site-header">
+    <div class="container bar">
+        <a class="brand" href={homePath[lang]} aria-label={profile.name}>
+            <Image
+                src={logo}
+                alt=""
+                width={30}
+                height={35}
+                densities={[1, 2]}
+                class="brand-logo"
+                loading="eager"
+            />
+            <span class="brand-name">{profile.name}</span>
+        </a>
+
+        <nav class="nav-desktop" aria-label={t.mainNav}>
+            <ul role="list">
+                {links.map((link) => (
+                    <li>
+                        <a href={`${base}#${link.id}`}>{link.label}</a>
+                    </li>
+                ))}
+            </ul>
+        </nav>
+
+        <div class="actions">
+            <a
+                class="lang-switch"
+                href={homePath[other]}
+                hreflang={other === 'pt' ? 'pt-BR' : 'en'}
+                lang={other === 'pt' ? 'pt-BR' : 'en'}
+                title={t.switchLanguage}
+            >
+                <span class:list={{ active: lang === 'pt' }}>PT</span>
+                <span aria-hidden="true">/</span>
+                <span class:list={{ active: lang === 'en' }}>EN</span>
+                <span class="visually-hidden">{t.switchLanguage}</span>
+            </a>
+
+            <button
+                class="icon-btn theme-toggle"
+                type="button"
+                aria-label={t.themeToggle}
+                data-theme-toggle
+            >
+                <Icon name="moon" class="icon-moon" />
+                <Icon name="sun" class="icon-sun" />
+            </button>
+
+            <details class="nav-mobile" data-mobile-menu>
+                <summary class="icon-btn" aria-label={t.menu}>
+                    <Icon name="menu" class="icon-open" />
+                    <Icon name="close" class="icon-close" />
+                </summary>
+                <nav class="mobile-panel card" aria-label={t.mainNav}>
+                    <ul role="list">
+                        {links.map((link) => (
+                            <li>
+                                <a href={`${base}#${link.id}`}>{link.label}</a>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </details>
+        </div>
+    </div>
+</header>
+
+<script>
+    const root = document.documentElement;
+
+    function currentTheme(): 'light' | 'dark' {
+        const forced = root.dataset.theme;
+        if (forced === 'light' || forced === 'dark') return forced;
+        return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((button) => {
+        button.addEventListener('click', () => {
+            const next = currentTheme() === 'dark' ? 'light' : 'dark';
+            root.dataset.theme = next;
+            try {
+                localStorage.setItem('theme', next);
+            } catch {}
+        });
+    });
+
+    const menu = document.querySelector<HTMLDetailsElement>('[data-mobile-menu]');
+    if (menu) {
+        menu.querySelectorAll('a').forEach((link) =>
+            link.addEventListener('click', () => menu.removeAttribute('open')),
+        );
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && menu.open) {
+                menu.removeAttribute('open');
+                menu.querySelector('summary')?.focus();
+            }
+        });
+        document.addEventListener('click', (event) => {
+            if (menu.open && !menu.contains(event.target as Node)) menu.removeAttribute('open');
+        });
+    }
+</script>
+
+<style>
+    .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        height: var(--header-h);
+        background: color-mix(in srgb, var(--bg) 85%, transparent);
+        backdrop-filter: saturate(1.4) blur(10px);
+        -webkit-backdrop-filter: saturate(1.4) blur(10px);
+        border-bottom: 1px solid var(--border);
+    }
+
+    .bar {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.625rem;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+        margin-right: auto;
+    }
+
+    .brand-logo {
+        width: 30px;
+        height: auto;
+    }
+
+    .nav-desktop ul {
+        display: flex;
+        gap: 0.25rem;
+    }
+
+    .nav-desktop a,
+    .mobile-panel a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 0.9375rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition:
+            color 0.15s ease,
+            background-color 0.15s ease;
+    }
+
+    .nav-desktop a:hover,
+    .mobile-panel a:hover {
+        color: var(--text);
+        background: var(--surface-2);
+    }
+
+    .actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .lang-switch {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        min-height: 44px;
+        padding: 0 0.875rem;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        font-family: var(--font-mono);
+        font-size: 0.8125rem;
+        color: var(--muted);
+        text-decoration: none;
+    }
+
+    .lang-switch:hover {
+        border-color: var(--accent);
+    }
+
+    .lang-switch .active {
+        color: var(--accent);
+        font-weight: 700;
+    }
+
+    /* Icons come from another component, so these selectors need :global(). */
+    .theme-toggle :global(.icon-sun) {
+        display: none;
+    }
+
+    :global(:root[data-theme='dark']) .theme-toggle :global(.icon-sun) {
+        display: block;
+    }
+
+    :global(:root[data-theme='dark']) .theme-toggle :global(.icon-moon) {
+        display: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :global(:root:not([data-theme='light'])) .theme-toggle :global(.icon-sun) {
+            display: block;
+        }
+
+        :global(:root:not([data-theme='light'])) .theme-toggle :global(.icon-moon) {
+            display: none;
+        }
+    }
+
+    .nav-mobile {
+        position: relative;
+    }
+
+    .nav-mobile summary {
+        list-style: none;
+    }
+
+    .nav-mobile summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .nav-mobile :global(.icon-close),
+    .nav-mobile[open] :global(.icon-open) {
+        display: none;
+    }
+
+    .nav-mobile[open] :global(.icon-close) {
+        display: block;
+    }
+
+    .mobile-panel {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 0.5rem);
+        min-width: 13rem;
+        padding: 0.5rem;
+    }
+
+    .mobile-panel a {
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-sm);
+        color: var(--text);
+    }
+
+    @media (max-width: 879px) {
+        .nav-desktop {
+            display: none;
+        }
+    }
+
+    @media (min-width: 880px) {
+        .nav-mobile {
+            display: none;
+        }
+    }
+
+    /* On phones the name already appears prominently right below, at the top of the page. */
+    @media (max-width: 459px) {
+        .brand-name {
+            display: none;
+        }
+    }
+</style>

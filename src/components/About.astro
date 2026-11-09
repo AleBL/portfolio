@@ -1,0 +1,108 @@
+---
+import { highlights, profile } from '../data/content';
+import { ui, type Lang } from '../i18n';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].sections.about;
+---
+
+<section id="about" class="section" aria-labelledby="about-title">
+    <div class="container about-grid">
+        <div>
+            <div class="section-head">
+                <span class="kicker">{t.kicker}</span>
+                <h2 id="about-title" class="section-title">
+                    {t.title}
+                </h2>
+            </div>
+            <div class="about-text">
+                {profile.about[lang].map((paragraph) => (
+                    <p>{paragraph}</p>
+                ))}
+            </div>
+        </div>
+
+        <ul class="highlights card" role="list">
+            {highlights.map((item) => (
+                <li>
+                    <span class="hex marker" aria-hidden="true" />
+                    <div>
+                        <h3>{item.title[lang]}</h3>
+                        <p>{item.text[lang]}</p>
+                        <span class="evidence">{item.evidence}</span>
+                    </div>
+                </li>
+            ))}
+        </ul>
+    </div>
+</section>
+
+<style>
+    .about-grid {
+        display: grid;
+        gap: 2.5rem;
+    }
+
+    @media (min-width: 880px) {
+        .about-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+    }
+
+    .about-text {
+        display: grid;
+        gap: 1rem;
+        font-size: 1.0625rem;
+    }
+
+    .highlights {
+        display: grid;
+        padding: 0.5rem;
+    }
+
+    .highlights li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1rem;
+        padding: 1.25rem;
+    }
+
+    .highlights li + li {
+        border-top: 1px solid var(--border);
+    }
+
+    .marker {
+        width: 18px;
+        aspect-ratio: 0.866;
+        margin-top: 0.3rem;
+        background: var(--brand);
+    }
+
+    h3 {
+        font-size: 1.0625rem;
+        font-weight: 650;
+    }
+
+    .highlights p {
+        margin-top: 0.25rem;
+        color: var(--muted);
+        font-size: 0.9375rem;
+    }
+
+    .evidence {
+        display: inline-block;
+        margin-top: 0.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--warm);
+        background: var(--warm-soft);
+        padding: 0.125rem 0.5rem;
+        border-radius: 999px;
+    }
+</style>

@@ -1,0 +1,103 @@
+---
+import { Image } from 'astro:assets';
+import { education } from '../data/content';
+import { formatPeriod, ui, type Lang } from '../i18n';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<section id="education" class="section" aria-labelledby="education-title">
+    <div class="container">
+        <div class="section-head">
+            <span class="kicker">{t.sections.education.kicker}</span>
+            <h2 id="education-title" class="section-title">
+                {t.sections.education.title}
+            </h2>
+        </div>
+
+        <ul class="list" role="list">
+            {education.map((item) => (
+                <li class="item card">
+                    <Image src={item.logo} alt="" width={56} height={56} class="logo" />
+                    <div class="info">
+                        <h3>{item.degree[lang]}</h3>
+                        <p>
+                            <a href={item.url} target="_blank" rel="noopener">
+                                {item.institution} ({item.shortName})
+                            </a>
+                            <span class="muted"> · {item.location[lang]}</span>
+                        </p>
+                    </div>
+                    <p class="meta">
+                        <span class="badge">{t.completed}</span>
+                        <span>{formatPeriod(item.start, item.end, lang)}</span>
+                    </p>
+                </li>
+            ))}
+        </ul>
+    </div>
+</section>
+
+<style>
+    .item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.75rem 1.25rem;
+        align-items: center;
+        padding: 1.5rem;
+    }
+
+    @media (min-width: 720px) {
+        .item {
+            grid-template-columns: auto 1fr auto;
+        }
+    }
+
+    .logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 999px;
+    }
+
+    h3 {
+        font-size: 1.125rem;
+        font-weight: 650;
+    }
+
+    .info p {
+        font-size: 0.9375rem;
+    }
+
+    .meta {
+        grid-column: 1 / -1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.5rem 0.75rem;
+        font-family: var(--font-mono);
+        font-size: 0.8125rem;
+        color: var(--muted);
+    }
+
+    @media (min-width: 720px) {
+        .meta {
+            grid-column: auto;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+    }
+
+    .badge {
+        padding: 0.0625rem 0.5rem;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-weight: 600;
+        font-size: 0.75rem;
+    }
+</style>
