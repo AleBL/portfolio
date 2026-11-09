@@ -1,18 +1,73 @@
-# Portfolio Website
-This repository features the source code for my personal portfolio website. 
-## About
-This website is built using **TypeScript** and **SCSS**, transpiled quickly using **Gulp** build tools. I opted away from any frameworks to experience what creating an interactive web page from scratch feels like.
-## Process
-Originally, I was writing my source code in ES6 JavaScript using the Babel transpiler. However, I began to realize I was unable to achieve the quality, control, and organization over my code I was aiming for. I quickly converted everything over to TypeScript; it was now easier to communicate internal states and HTML elements across multiple files.
+# Portfolio · Alessandro Barros
 
-I designed my SVG logo using **Figma**.
+Personal website with the professional experience, projects and résumé of Alessandro Barros, full stack developer.
 
-The particle effects are heavily based on [VincentGarreau's particles.js framework](https://github.com/VincentGarreau/particles.js). My goal was to re-imagine his framework using classes and internal states. Type annotations via TypeScript also help a lot in creating the configuration settings.
+**Live:** https://portfolio.a-barros.uk
 
-Nearly all of the page's content is organized using **CSS Flexbox**. I created an [extensive library](https://github.com/jackson-nestelroad/portfolio-website/blob/master/src/scss/General/Flex.scss) for working with flexbox grids and flex items in multiple viewports.
+## Stack
 
-The hamburger menu button and the actual pullout menu are detached, so I created a simple [Event Dispatcher](https://github.com/jackson-nestelroad/portfolio-website/blob/master/src/ts/Modules/EventDispatcher.ts) class to communicate custom events to elements on the page. For example, the `<main>` tag subscribes to the `MenuButton` dispatcher, so when the `MenuButton` dispatches the `toggle` event, the `<main>` tag knows whether to open or close the menu. These events are not dispatches when the Web API, so they cannot be intercepted.
+- [Astro](https://astro.build) generating static HTML, with no client-side UI framework
+- TypeScript in strict mode
+- Hand-written CSS with design tokens (light and dark themes), no styling libraries
+- Self-hosted fonts (Inter and JetBrains Mono via Fontsource)
+- Deployed on Vercel
 
-With the skills, experience, projects, and education sections, I needed an easy way to create reusable bits of HTML for recurring content. I decided to begin using **JSX** syntax since it is natively supported in TypeScript using a custom JSX Factory function. Opposed to creating a React Node, my JSX compiles directly to an `HTMLElement` to be placed onto the page.
+## Features
 
-Originally, these JSX-oriented classes would transform a set of data into HTML, but I later created a tiny [Component class](https://github.com/jackson-nestelroad/portfolio-website/blob/master/src/ts/Classes/Component/index.ts) to strengthen my solution and make it more interface-oriented. These components now create their element in the constructor, have references to rendered elements, and have the ability to update the HTML displayed on the page. I plan to study more about creating JavaScript Web Components (similar to how React works) in the future as a side project.
+- Portuguese at `/` and English at `/en/`, with `hreflang` and per-language meta tags
+- Printable résumé at `/curriculo/` and `/en/resume/`, generated from the same data as the site
+- Light and dark themes that follow the system preference
+- Images optimized at build time (WebP with `srcset`)
+- Open Graph, JSON-LD (`Person`), sitemap and `robots.txt`
+- Minimal JavaScript: only the theme toggle, mobile menu, copy-email button and print button
+
+## Getting started
+
+Requires Node.js 22.23.4 or later.
+
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # astro check + build into dist/
+npm run preview  # serve the build locally
+```
+
+## Editing the content
+
+All site and résumé text, in both languages, lives in [`src/data/content.ts`](src/data/content.ts). Fixed UI strings (menus, buttons) live in [`src/i18n.ts`](src/i18n.ts). TypeScript reports an error if a translation is missing.
+
+### Adding or replacing a project
+
+Projects are the `featuredProjects` (large cards) and `otherProjects` (compact list) arrays in `src/data/content.ts`. To add a screenshot, save the image in `src/assets/projects/`, import it at the top of the file and set it as `image`. Without an image, the card shows the `terminal` commands instead. Astro converts and resizes the image during the build.
+
+```ts
+import myAppShot from '../assets/projects/my-app.png';
+
+{
+    name: 'My App',
+    kind: { pt: 'Aplicação full stack', en: 'Full stack app' },
+    summary: { pt: '...', en: '...' },
+    highlights: { pt: ['...'], en: ['...'] },
+    stack: ['TypeScript', 'React'],
+    repo: 'https://github.com/AleBL/my-app',
+    demo: 'https://my-app.example.com', // optional
+    image: myAppShot,                   // optional
+}
+```
+
+## Project structure
+
+```
+src/
+├── assets/        images optimized at build time (photo, logos, project screenshots)
+├── components/    one page section per component
+├── data/          content (profile, experience, projects, skills, education)
+├── layouts/       base HTML, SEO and theme
+├── pages/         routes: home pt/en, résumé pt/en and 404
+├── styles/        tokens and global styles
+└── i18n.ts        languages, UI strings and date formatting
+```
+
+## Credits
+
+The first version of this site started from [portfolio-website](https://github.com/jackson-nestelroad/portfolio-website) by Jackson Nestelroad. The current version was rewritten from scratch in Astro; the hexagon background pattern is a nod to that origin.
