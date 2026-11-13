@@ -1,0 +1,165 @@
+---
+import Icon from './Icon.astro';
+import { profile } from '../data/content';
+import { ui, type Lang } from '../i18n';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].sections.contact;
+---
+
+<section id="contact" class="contact" aria-labelledby="contact-title">
+    <div class="container inner">
+        <span class="kicker">{t.kicker}</span>
+        <h2 id="contact-title">{t.title}</h2>
+        <p class="text">{t.text}</p>
+
+        <div class="email-row">
+            <a class="btn btn-primary email" href={`mailto:${profile.email}`}>
+                <Icon name="mail" />
+                <span>{profile.email}</span>
+            </a>
+            <button
+                class="icon-btn copy"
+                type="button"
+                data-copy={profile.email}
+                data-label-copy={t.copy}
+                data-label-copied={t.copied}
+                aria-label={t.copy}
+                title={t.copy}
+            >
+                <Icon name="copy" class="icon-copy" />
+                <Icon name="check" class="icon-check" />
+            </button>
+            <span class="visually-hidden" role="status" aria-live="polite" data-copy-status></span>
+        </div>
+
+        <div class="social">
+            <a class="btn btn-ghost" href={profile.linkedin} target="_blank" rel="me noopener">
+                <Icon name="linkedin" /> LinkedIn
+            </a>
+            <a class="btn btn-ghost" href={profile.github} target="_blank" rel="me noopener">
+                <Icon name="github" /> GitHub
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+        const status = button.parentElement?.querySelector<HTMLElement>('[data-copy-status]');
+        button.addEventListener('click', async () => {
+            try {
+                await navigator.clipboard.writeText(button.dataset.copy ?? '');
+            } catch {
+                return;
+            }
+            button.classList.add('copied');
+            button.setAttribute('aria-label', button.dataset.labelCopied ?? '');
+            if (status) status.textContent = button.dataset.labelCopied ?? '';
+            setTimeout(() => {
+                button.classList.remove('copied');
+                button.setAttribute('aria-label', button.dataset.labelCopy ?? '');
+                if (status) status.textContent = '';
+            }, 2000);
+        });
+    });
+</script>
+
+<style>
+    .contact {
+        background: var(--ink);
+        color: var(--ink-text);
+        padding-block: clamp(4rem, 9vw, 6.5rem);
+        text-align: center;
+    }
+
+    .inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .kicker {
+        color: #3cc79f;
+    }
+
+    h2 {
+        font-size: clamp(2rem, 4vw + 0.5rem, 3rem);
+        font-weight: 800;
+        color: #fff;
+    }
+
+    .text {
+        max-width: 34rem;
+        margin-top: 1rem;
+        color: var(--ink-muted);
+        font-size: 1.0625rem;
+    }
+
+    .email-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+        max-width: 100%;
+    }
+
+    .email {
+        background: #3cc79f;
+        color: #0e1416;
+        max-width: 100%;
+    }
+
+    .email span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .copy {
+        border-color: #33434b;
+        color: var(--ink-text);
+    }
+
+    .copy:hover {
+        border-color: #3cc79f;
+        color: #3cc79f;
+    }
+
+    .copy :global(.icon-check),
+    .copy.copied :global(.icon-copy) {
+        display: none;
+    }
+
+    .copy.copied :global(.icon-check) {
+        display: block;
+        color: #3cc79f;
+    }
+
+    .social {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
+    }
+
+    .social .btn-ghost {
+        color: var(--ink-text);
+        border-color: #33434b;
+    }
+
+    .social .btn-ghost:hover {
+        color: #3cc79f;
+        border-color: #3cc79f;
+    }
+
+    .contact :focus-visible {
+        outline-color: #3cc79f;
+    }
+</style>

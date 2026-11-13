@@ -1,0 +1,67 @@
+---
+// Home page in both languages: "/" (Portuguese, default) and "/en/".
+import type { GetStaticPaths } from 'astro';
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
+import Education from '../components/Education.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { education, experience, profile } from '../data/content';
+import { homePath, type Lang } from '../i18n';
+
+export const getStaticPaths = (() => [
+    { params: { lang: undefined }, props: { lang: 'pt' as Lang } },
+    { params: { lang: 'en' }, props: { lang: 'en' as Lang } },
+]) satisfies GetStaticPaths;
+
+const { lang } = Astro.props;
+
+const title = `${profile.name} | ${profile.role[lang]}`;
+const site = Astro.site?.href ?? 'https://portfolio.a-barros.uk/';
+
+const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: profile.fullName,
+    alternateName: profile.name,
+    jobTitle: profile.role[lang],
+    description: profile.description[lang],
+    url: new URL(homePath[lang], site).href,
+    email: `mailto:${profile.email}`,
+    sameAs: [profile.github, profile.linkedin],
+    worksFor: { '@type': 'Organization', name: experience[0].name[lang], url: experience[0].url },
+    alumniOf: education.map((item) => ({
+        '@type': 'CollegeOrUniversity',
+        name: item.institution,
+        url: item.url,
+    })),
+};
+---
+
+<Base
+    lang={lang}
+    title={title}
+    description={profile.description[lang]}
+    alternates={[
+        { lang: 'pt', path: homePath.pt },
+        { lang: 'en', path: homePath.en },
+    ]}
+    jsonLd={jsonLd}
+>
+    <Header lang={lang} />
+    <main id="main-content">
+        <Hero lang={lang} />
+        <About lang={lang} />
+        <Experience lang={lang} />
+        <Projects lang={lang} />
+        <Skills lang={lang} />
+        <Education lang={lang} />
+        <Contact lang={lang} />
+    </main>
+    <Footer lang={lang} />
+</Base>

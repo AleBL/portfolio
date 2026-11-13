@@ -1,0 +1,379 @@
+---
+// One-page A4 résumé built from the same data as the portfolio.
+import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
+import {
+    education,
+    experience,
+    featuredProjects,
+    profile,
+    skills,
+    type Company,
+} from '../data/content';
+import { formatPeriod, homePath, resumePath, ui, type Lang } from '../i18n';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+const r = t.resume;
+const site = (Astro.site?.href ?? 'https://portfolio.a-barros.uk/').replace(/\/$/, '');
+const display = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+
+function companyPeriod(company: Company): string {
+    const starts = company.roles.map((role) => role.start).sort();
+    const ends = company.roles.map((role) => role.end);
+    const end = ends.includes(null) ? null : (ends as string[]).sort().at(-1)!;
+    return formatPeriod(starts[0], end, lang);
+}
+
+// Featured projects only, so the résumé fits on a single A4 page.
+const projects = featuredProjects.map((p) => ({
+    name: p.name,
+    text: p.summary[lang],
+    stack: p.stack,
+    repo: p.repo,
+    demo: p.demo,
+}));
+---
+
+<Base
+    lang={lang}
+    title={`${r.title} | ${profile.name}`}
+    description={profile.description[lang]}
+    alternates={[
+        { lang: 'pt', path: resumePath.pt },
+        { lang: 'en', path: resumePath.en },
+    ]}
+>
+    <div class="toolbar">
+        <a class="btn btn-ghost" href={homePath[lang]}>
+            ← {r.back}
+        </a>
+        <button class="btn btn-primary" type="button" data-print>
+            <Icon name="printer" /> {r.print}
+        </button>
+    </div>
+
+    <main class="page" id="main-content">
+        <header class="head">
+            <div>
+                <h1>{profile.fullName}</h1>
+                <p class="role">{profile.role[lang]}</p>
+            </div>
+            <ul class="contacts" role="list">
+                <li>
+                    <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                </li>
+                <li>
+                    <a href={profile.linkedin}>{display(profile.linkedin)}</a>
+                </li>
+                <li>
+                    <a href={profile.github}>{display(profile.github)}</a>
+                </li>
+                <li>
+                    <a href={site}>{display(site)}</a>
+                </li>
+            </ul>
+        </header>
+
+        <section>
+            <h2>{r.summary}</h2>
+            <p>
+                {profile.headline[lang]} {profile.description[lang]}
+            </p>
+        </section>
+
+        <section>
+            <h2>{r.experience}</h2>
+            {experience.map((company) => (
+                <div class="company">
+                    <div class="row">
+                        <h3>{company.name[lang]}</h3>
+                        <span class="meta">
+                            {company.location[lang]} · {companyPeriod(company)}
+                        </span>
+                    </div>
+                    {company.roles.map((role) => (
+                        <div class="role">
+                            <div class="row">
+                                <h4>
+                                    {role.title[lang]} <span class="team">· {role.team[lang]}</span>
+                                </h4>
+                                <span class="meta">{formatPeriod(role.start, role.end, lang)}</span>
+                            </div>
+                            <ul>
+                                {role.bullets[lang].map((bullet) => (
+                                    <li>{bullet}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+            ))}
+        </section>
+
+        <section>
+            <h2>{r.education}</h2>
+            {education.map((item) => (
+                <div class="row">
+                    <h3>
+                        {item.degree[lang]}{' '}
+                        <span class="team">
+                            · {item.institution} ({item.shortName})
+                        </span>
+                    </h3>
+                    <span class="meta">{formatPeriod(item.start, item.end, lang)}</span>
+                </div>
+            ))}
+        </section>
+
+        <section>
+            <h2>{r.projects}</h2>
+            <ul class="projects" role="list">
+                {projects.map((project) => (
+                    <li>
+                        <strong>{project.name}</strong>
+                        <span class="team"> ({project.stack.join(', ')})</span>: {project.text}{' '}
+                        <a href={project.repo}>{display(project.repo)}</a>
+                        {project.demo && (
+                            <>
+                                {' · '}
+                                <a href={project.demo}>{display(project.demo)}</a>
+                            </>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </section>
+
+        <section>
+            <h2>{r.skills}</h2>
+            <dl class="skills">
+                {skills.map((group) => (
+                    <div>
+                        <dt>{group.title[lang]}</dt>
+                        <dd>{group.items.join(', ')}</dd>
+                    </div>
+                ))}
+            </dl>
+        </section>
+    </main>
+</Base>
+
+<script>
+    document.querySelector('[data-print]')?.addEventListener('click', () => window.print());
+</script>
+
+<style>
+    .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.75rem;
+        width: min(100% - 2 * var(--gutter), 210mm);
+        margin: 1.5rem auto 1rem;
+    }
+
+    .page {
+        width: min(100% - 2 * var(--gutter), 210mm);
+        margin: 0 auto 3rem;
+        padding: clamp(1.25rem, 5vw, 14mm) clamp(1.25rem, 5vw, 16mm);
+        background: #fff;
+        color: #111827;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        box-shadow: var(--shadow);
+        font-size: 9.5pt;
+        line-height: 1.45;
+        --resume-accent: #1a7f62;
+        --resume-muted: #5b6670;
+    }
+
+    .page a {
+        color: var(--resume-accent);
+        text-decoration: none;
+    }
+
+    .head {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.75rem 2rem;
+        padding-bottom: 10px;
+        margin-bottom: 12px;
+        border-bottom: 2.5px solid var(--resume-accent);
+    }
+
+    h1 {
+        font-size: 21pt;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+    }
+
+    .role {
+        margin-top: 2px;
+        color: var(--resume-accent);
+        font-weight: 600;
+        font-size: 10.5pt;
+    }
+
+    .contacts {
+        font-size: 8.5pt;
+        line-height: 1.7;
+        text-align: right;
+    }
+
+    section {
+        margin-bottom: 12px;
+    }
+
+    h2 {
+        margin-bottom: 6px;
+        padding-bottom: 2px;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 8pt;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--resume-accent);
+    }
+
+    h3 {
+        font-size: 9.5pt;
+        font-weight: 700;
+        letter-spacing: 0;
+    }
+
+    h4 {
+        font-size: 9pt;
+        font-weight: 600;
+        letter-spacing: 0;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 0 1rem;
+    }
+
+    .meta,
+    .team {
+        color: var(--resume-muted);
+        font-weight: 400;
+        font-size: 8pt;
+    }
+
+    .meta {
+        white-space: nowrap;
+    }
+
+    .company {
+        margin-bottom: 8px;
+        break-inside: avoid;
+    }
+
+    .company .role {
+        margin: 4px 0;
+        padding-left: 10px;
+        border-left: 2px solid #e5e7eb;
+        color: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+    }
+
+    .company .role ul,
+    .projects {
+        padding-left: 1rem;
+        font-size: 8.8pt;
+        color: #374151;
+    }
+
+    .projects {
+        list-style: disc;
+        display: grid;
+        gap: 2px;
+    }
+
+    .skills {
+        display: grid;
+        gap: 2px;
+        font-size: 8.8pt;
+    }
+
+    .skills div {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .skills dt {
+        flex: none;
+        width: 9.5rem;
+        font-weight: 600;
+    }
+
+    .skills dd {
+        margin: 0;
+        color: #374151;
+    }
+
+    @media (max-width: 560px) {
+        .contacts {
+            text-align: left;
+        }
+
+        .skills div {
+            flex-direction: column;
+            gap: 0;
+        }
+    }
+
+    @media print {
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        :global(body) {
+            background: #fff;
+        }
+
+        .toolbar {
+            display: none;
+        }
+
+        .page {
+            width: 210mm;
+            margin: 0;
+            padding: 10mm 13mm;
+            border: 0;
+            border-radius: 0;
+            box-shadow: none;
+            font-size: 9pt;
+            line-height: 1.38;
+        }
+
+        .company .role ul,
+        .projects,
+        .skills {
+            font-size: 8.4pt;
+        }
+
+        section {
+            margin-bottom: 9px;
+        }
+
+        .skills {
+            grid-template-columns: 1fr 1fr;
+            column-gap: 1.5rem;
+        }
+
+        .skills dt {
+            width: 7.5rem;
+        }
+    }
+</style>

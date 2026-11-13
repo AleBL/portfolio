@@ -1,0 +1,47 @@
+---
+import { profile } from '../data/content';
+import { ui, type Lang } from '../i18n';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].footer;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+    <div class="container bar">
+        <p>
+            © {year} {profile.name}
+        </p>
+        <p>
+            {t.builtWith} ·
+            <a href={profile.repository} target="_blank" rel="noopener">
+                {t.source}
+            </a>
+        </p>
+    </div>
+</footer>
+
+<style>
+    .site-footer {
+        background: var(--ink);
+        color: var(--ink-muted);
+        border-top: 1px solid #22303a;
+        font-size: 0.875rem;
+    }
+
+    .bar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.5rem 1.5rem;
+        padding-block: 1.5rem;
+    }
+
+    a {
+        color: var(--ink-text);
+    }
+</style>
